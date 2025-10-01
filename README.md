@@ -1,6 +1,6 @@
 # @treno/finlib
 
-**Production-ready finance library for portfolio construction, risk analytics, and quantitative metrics.**
+Finance library for portfolio construction, risk analytics, and quantitative metrics.
 
 Built for DeFi and TradFi environments. Modular, type-safe, and battle-tested.
 
