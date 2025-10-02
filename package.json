@@ -1,0 +1,60 @@
+{
+  "name": "finlib-ts",
+  "version": "0.1.0",
+  "description": "Production-ready finance library for portfolio construction, risk analytics, and quantitative metrics",
+  "author": "Benjamin Damm <kontakt@benjamin-damm.ch>",
+  "license": "MIT",
+  "keywords": [
+    "finance",
+    "portfolio-management",
+    "risk-analytics",
+    "quantitative-finance",
+    "typescript",
+    "defi",
+    "tradfi",
+    "risk-modeling",
+    "financial-engineering"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit false",
+    "dev": "tsc --watch",
+    "lint": "eslint src --ext .ts --ignore-pattern '**/*.test.ts'",
+    "lint:test": "eslint src --ext .ts --config .eslintrc.test.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.19",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.6.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "zod": "^4.1.11"
+  }
+}
