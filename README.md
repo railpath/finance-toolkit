@@ -15,16 +15,26 @@ Part of the [Railpath](https://github.com/railpath) open source ecosystem – bu
 ### **Portfolio Performance Metrics**
 - **Time-Weighted Return (TWR)** – Performance independent of cash flows
 - **Money-Weighted Return (MWR)** – IRR-based performance with cash flow consideration
-- **Sharpe Ratio** – Risk-adjusted returns
-- **Sortino Ratio** – Downside risk-adjusted returns
-- **Calmar Ratio** – Return vs. maximum drawdown
+- **Portfolio Metrics** – Comprehensive portfolio analysis (CAGR, Sharpe, Sortino, VaR, ES)
+- **Performance Attribution** – Factor-based performance analysis
+- **Portfolio Optimization** – Mean-variance optimization
+- **Portfolio Rebalancing** – Rebalancing strategies and trade calculations
+- **Equal Weight Portfolio** – Equal weight allocation strategies
+- **Returns Calculation** – Various return calculation methods
+- **Risk Metrics** – Portfolio-level risk analysis
+- **Information Ratio** – Active return vs. tracking error
+- **Tracking Error** – Deviation from benchmark
 
 ### **Risk Metrics**
 - **Value at Risk (VaR)** – Historical, Parametric, Monte Carlo methods
 - **Expected Shortfall (CVaR)** – Conditional Value at Risk
 - **Maximum Drawdown** – Largest loss from peak to trough
 - **Alpha & Beta** – CAPM-based performance metrics
-- **Tracking Error** – Deviation from benchmark
+- **Sharpe Ratio** – Risk-adjusted returns
+- **Sortino Ratio** – Downside risk-adjusted returns
+- **Calmar Ratio** – Return vs. maximum drawdown
+- **Standard Deviation** – Classical volatility measure
+- **VaR 95% & 99%** – Pre-configured confidence levels
 
 ### **Volatility Calculations**
 - **Standard Deviation** – Classical volatility
@@ -36,7 +46,10 @@ Part of the [Railpath](https://github.com/railpath) open source ecosystem – bu
 - **Correlation Matrix** – Asset correlations
 - **Covariance Matrix** – Asset covariances
 - **Portfolio Volatility** – Total portfolio risk
-- **Information Ratio** – Active return vs. tracking error
+- **Portfolio Optimization** – Mean-variance optimization
+- **Portfolio Rebalancing** – Rebalancing strategies
+- **Equal Weight Allocation** – Equal weight strategies
+- **Performance Attribution** – Factor-based analysis
 
 ---
 
@@ -186,16 +199,36 @@ console.log(result.periodReturns); // number[]
 |----------|-------------|-------|--------|
 | `calculateTimeWeightedReturn` | TWR Performance | Portfolio Values, Cash Flows | TWR, Annualized TWR, Period Returns |
 | `calculateMoneyWeightedReturn` | MWR Performance (IRR) | Cash Flows, Dates, Final Value | MWR, Annualized MWR, NPV, Iterations |
+| `calculatePortfolioMetrics` | Comprehensive Analysis | Portfolio Values, Risk-Free Rate | CAGR, Sharpe, Sortino, VaR, ES, Volatility |
+| `calculatePerformanceAttribution` | Factor Analysis | Returns, Factor Returns | Factor Contributions, Active Return |
+| `calculatePortfolioOptimization` | Mean-Variance Optimization | Expected Returns, Covariance Matrix | Optimal Weights, Risk-Return |
+| `calculatePortfolioRebalancing` | Rebalancing Strategies | Current Weights, Target Weights | New Weights, Trade Amounts |
+| `calculateEqualWeightPortfolio` | Equal Weight Allocation | Asset Count | Equal Weights, Portfolio Metrics |
+| `calculateReturns` | Return Calculations | Prices, Dates | Various Return Types |
+| `calculateRiskMetrics` | Portfolio Risk Analysis | Returns, Risk-Free Rate | Risk Metrics, VaR, ES |
+| `calculateInformationRatio` | Active Return Analysis | Portfolio Returns, Benchmark Returns | Information Ratio, Active Return |
+| `calculateTrackingError` | Benchmark Deviation | Portfolio Returns, Benchmark Returns | Tracking Error, Active Risk |
 
 ### Risk Metrics
 
 | Function | Description | Methods |
 |----------|-------------|---------|
 | `calculateVaR` | Value at Risk | Historical, Parametric, Monte Carlo |
+| `calculateVaR95` | VaR 95% Confidence | Historical, Parametric, Monte Carlo |
+| `calculateVaR99` | VaR 99% Confidence | Historical, Parametric, Monte Carlo |
 | `calculateExpectedShortfall` | Conditional VaR | Historical, Parametric |
+| `calculateHistoricalVaR` | Historical VaR | Historical Method |
+| `calculateParametricVaR` | Parametric VaR | Normal Distribution |
+| `calculateMonteCarloVaR` | Monte Carlo VaR | Simulation Method |
+| `calculateHistoricalExpectedShortfall` | Historical ES | Historical Method |
+| `calculateParametricExpectedShortfall` | Parametric ES | Normal Distribution |
 | `calculateSharpeRatio` | Risk-Adjusted Returns | Standard, Annualized |
 | `calculateSortinoRatio` | Downside Risk-Adjusted | Standard, Annualized |
+| `calculateCalmarRatio` | Return vs. Drawdown | Calmar Ratio |
+| `calculateAlpha` | CAPM Alpha | Asset vs. Benchmark |
+| `calculateBeta` | CAPM Beta | Asset vs. Benchmark |
 | `calculateMaxDrawdown` | Maximum Loss | Peak-to-Trough Analysis |
+| `calculateStandardDeviation` | Standard Deviation | Classical Measure |
 
 ### Volatility
 
@@ -203,8 +236,17 @@ console.log(result.periodReturns); // number[]
 |----------|-------------|-------|
 | `calculateVolatility` | Standard Deviation | Returns Array |
 | `calculateEWMAVolatility` | Exponentially Weighted | Returns, Lambda |
-| `calculateParkinsonVolatility` | High-Low Range | OHLC Data |
-| `calculateGarmanKlassVolatility` | OHLC-based | OHLC Data |
+| `calculateParkinsonVolatility` | High-Low Range | High, Low Prices |
+| `calculateGarmanKlassVolatility` | OHLC-based | Open, High, Low, Close |
+| `calculateStandardDeviation` | Classical Measure | Returns Array |
+
+### Portfolio Analysis
+
+| Function | Description | Input |
+|----------|-------------|-------|
+| `calculateCorrelationMatrix` | Asset Correlations | Asset Returns Matrix |
+| `calculateCovarianceMatrix` | Asset Covariances | Asset Returns Matrix |
+| `calculatePortfolioVolatility` | Portfolio Risk | Weights, Covariance Matrix |
 
 ---
 

@@ -25,6 +25,15 @@ export { calculateVolatility } from './risk/calculateVolatility';
 // Portfolio Performance Metrics
 export { calculateTimeWeightedReturn } from './portfolio/calculateTimeWeightedReturn';
 export { calculateMoneyWeightedReturn } from './portfolio/calculateMoneyWeightedReturn';
+export { calculatePortfolioMetrics } from './portfolio/calculatePortfolioMetrics';
+export { calculatePerformanceAttribution } from './portfolio/calculatePerformanceAttribution';
+export { calculatePortfolioOptimization } from './portfolio/calculatePortfolioOptimization';
+export { calculatePortfolioRebalancing } from './portfolio/calculatePortfolioRebalancing';
+export { calculateEqualWeightPortfolio } from './portfolio/calculateEqualWeightPortfolio';
+export { calculateReturns } from './portfolio/calculateReturns';
+export { calculateRiskMetrics } from './portfolio/calculateRiskMetrics';
+export { calculateInformationRatio } from './portfolio/calculateInformationRatio';
+export { calculateTrackingError } from './portfolio/calculateTrackingError';
 
 // Utility Functions
 export { getZScore } from './utils/getZScore';
@@ -61,3 +70,21 @@ export type { TimeWeightedReturnOptions } from './schemas/TimeWeightedReturnOpti
 export type { TimeWeightedReturnResult } from './schemas/TimeWeightedReturnResultSchema';
 export type { MoneyWeightedReturnOptions } from './schemas/MoneyWeightedReturnOptionsSchema';
 export type { MoneyWeightedReturnResult } from './schemas/MoneyWeightedReturnResultSchema';
+export type { PortfolioMetricsOptions } from './schemas/PortfolioMetricsOptionsSchema';
+export type { PortfolioMetricsResult } from './schemas/PortfolioMetricsResultSchema';
+export type { PerformanceAttributionOptions } from './schemas/PerformanceAttributionOptionsSchema';
+export type { PerformanceAttributionResult } from './schemas/PerformanceAttributionResultSchema';
+export type { PortfolioOptimizationOptions } from './schemas/PortfolioOptimizationOptionsSchema';
+export type { PortfolioOptimizationResult } from './schemas/PortfolioOptimizationResultSchema';
+export type { PortfolioRebalancingOptions } from './schemas/PortfolioRebalancingOptionsSchema';
+export type { PortfolioRebalancingResult } from './schemas/PortfolioRebalancingResultSchema';
+export type { EqualWeightOptions } from './schemas/EqualWeightOptionsSchema';
+export type { EqualWeightResult } from './schemas/EqualWeightResultSchema';
+export type { ReturnCalculationOptions } from './schemas/ReturnCalculationOptionsSchema';
+export type { ReturnCalculationResult } from './schemas/ReturnCalculationResultSchema';
+export type { RiskMetricsOptions } from './schemas/RiskMetricsOptionsSchema';
+export type { RiskMetricsResult } from './schemas/RiskMetricsResultSchema';
+export type { InformationRatioOptions } from './schemas/InformationRatioOptionsSchema';
+export type { InformationRatioResult } from './schemas/InformationRatioResultSchema';
+export type { TrackingErrorOptions } from './schemas/TrackingErrorOptionsSchema';
+export type { TrackingErrorResult } from './schemas/TrackingErrorResultSchema';
