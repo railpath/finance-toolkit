@@ -1,8 +1,8 @@
-# finlib-ts
+# 🏔️ @railpath/finance-toolkit
 
 A comprehensive TypeScript library for portfolio management and risk analytics.
 
-**finlib-ts** provides a complete collection of financial metrics with focus on modularity, type-safety, and performance.
+**@railpath/finance-toolkit** provides a complete collection of financial metrics with focus on modularity, type-safety, and performance.
 
 ---
 
@@ -39,7 +39,7 @@ A comprehensive TypeScript library for portfolio management and risk analytics.
 ## Installation
 
 ```bash
-npm install finlib-ts
+npm install @railpath/finance-toolkit
 ```
 
 ## Quick Start
@@ -50,7 +50,7 @@ npm install finlib-ts
 import { 
   calculateTimeWeightedReturn, 
   calculateMoneyWeightedReturn 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Time-Weighted Return (TWR)
 const twr = calculateTimeWeightedReturn({
@@ -75,7 +75,7 @@ import {
   calculateVaR, 
   calculateSharpeRatio, 
   calculateMaxDrawdown 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Value at Risk (95% Confidence)
 const var95 = calculateVaR({
@@ -103,7 +103,7 @@ const maxDD = calculateMaxDrawdown({
 import { 
   calculateCorrelationMatrix, 
   calculatePortfolioVolatility 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Asset Correlation Matrix
 const correlation = calculateCorrelationMatrix({
@@ -156,7 +156,7 @@ import type {
   TimeWeightedReturnResult,
   MoneyWeightedReturnOptions,
   MoneyWeightedReturnResult 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Type-safe Options
 const options: TimeWeightedReturnOptions = {
