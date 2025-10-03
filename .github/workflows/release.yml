@@ -41,24 +41,15 @@ jobs:
       - name: Build package
         run: npm run build
       
-      - name: Debug npm authentication
+      - name: Check package exists
         run: |
-          echo "=== NPM Authentication Debug ==="
-          echo "npm whoami:"
-          npm whoami || echo "npm whoami failed"
-          echo ""
-          echo "npm config list:"
-          npm config list || echo "npm config failed"
-          echo ""
-          echo "Checking package existence:"
-          npm view @railpath/finance-toolkit version || echo "Package not found"
-          echo ""
-          echo "Checking package access:"
-          npm access list packages @railpath || echo "Access check failed"
+          echo "Checking if package exists in npm registry..."
+          npm view @railpath/finance-toolkit version
       
       - name: Publish to npm
         run: |
           echo "Publishing to npm registry using trusted publisher..."
+          npm config set registry https://registry.npmjs.org/
           npm publish --access public --provenance
       
       - name: Create GitHub Release
