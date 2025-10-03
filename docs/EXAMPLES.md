@@ -1,6 +1,6 @@
 # Practical Examples
 
-Real-world use cases and code examples for finlib-ts.
+Real-world use cases and code examples for @railpath/finance-toolkit.
 
 ---
 
@@ -16,7 +16,7 @@ import {
   calculateMaxDrawdown,
   calculateAlpha,
   calculateBeta
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Portfolio Performance Dashboard
 class PortfolioDashboard {
@@ -107,7 +107,7 @@ import {
   calculateHistoricalVaR,
   calculateParametricVaR,
   calculateMonteCarloVaR
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class RiskMonitoringSystem {
   private portfolioReturns: number[] = [];
@@ -200,7 +200,7 @@ import {
   calculatePortfolioVolatility,
   calculateSharpeRatio,
   calculateSortinoRatio
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class MultiAssetPortfolio {
   private assetReturns: number[][] = [];
@@ -298,7 +298,7 @@ import {
   calculateEWMAVolatility,
   calculateParkinsonVolatility,
   calculateGarmanKlassVolatility
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class VolatilityAnalyzer {
   private returns: number[] = [];
@@ -384,7 +384,7 @@ import {
   calculateSharpeRatio,
   calculateMaxDrawdown,
   calculateCalmarRatio
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class ClientReportGenerator {
   generatePerformanceReport(clientId: string, portfolioData: any) {
@@ -485,7 +485,7 @@ import {
   calculateExpectedShortfall,
   calculateMaxDrawdown,
   calculateVolatility
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class LiveRiskDashboard {
   private portfolioData: any[] = [];
@@ -587,7 +587,7 @@ import {
   calculateCalmarRatio,
   calculateAlpha,
   calculateBeta
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 class StrategyBacktester {
   backtestStrategy(strategyReturns: number[], benchmarkReturns: number[], riskFreeRate: number) {

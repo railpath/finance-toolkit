@@ -1,6 +1,6 @@
 # Portfolio Performance Metrics
 
-Detailed documentation of portfolio performance metrics in finlib-ts.
+Detailed documentation of portfolio performance metrics in @railpath/finance-toolkit.
 
 ---
 
@@ -33,7 +33,7 @@ r_i = (V_i - V_{i-1} - CF_i) / (V_{i-1} + CF_i)
 ### Code Example
 
 ```typescript
-import { calculateTimeWeightedReturn } from 'finlib-ts';
+import { calculateTimeWeightedReturn } from '@railpath/finance-toolkit';
 
 // Portfolio with cash flows
 const portfolioValues = [1000, 1100, 1200, 1150]; // Portfolio values
@@ -114,7 +114,7 @@ function calculateIRR(cashFlows: number[], timePeriods: number[], maxIterations:
 ### Code Example
 
 ```typescript
-import { calculateMoneyWeightedReturn } from 'finlib-ts';
+import { calculateMoneyWeightedReturn } from '@railpath/finance-toolkit';
 
 // Investment with cash flows
 const cashFlows = [1000, 100, -50]; // Initial investment, additional investment, withdrawal

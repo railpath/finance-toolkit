@@ -1,6 +1,6 @@
 # TypeScript Types & Schemas
 
-Complete documentation of all TypeScript types and Zod schemas in finlib-ts.
+Complete documentation of all TypeScript types and Zod schemas in @railpath/finance-toolkit.
 
 ---
 
@@ -530,7 +530,7 @@ import type {
   MoneyWeightedReturnResult,
   VaROptions,
   VaRResult
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Type-safe function calls
 function analyzePortfolio(portfolioData: {

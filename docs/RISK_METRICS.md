@@ -1,6 +1,6 @@
 # Risk Metrics & VaR Calculations
 
-Comprehensive documentation of risk metrics and Value at Risk (VaR) calculations in finlib-ts.
+Comprehensive documentation of risk metrics and Value at Risk (VaR) calculations in @railpath/finance-toolkit.
 
 ---
 
@@ -29,7 +29,7 @@ t = Time period
 Based on historical returns and uses empirical quantiles.
 
 ```typescript
-import { calculateHistoricalVaR } from 'finlib-ts';
+import { calculateHistoricalVaR } from '@railpath/finance-toolkit';
 
 const historicalVaR = calculateHistoricalVaR({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02, -0.05, 0.01],
@@ -54,7 +54,7 @@ console.log('Historical VaR (95%):', historicalVaR.var); // -0.05 (5% loss)
 Based on normal distribution assumption.
 
 ```typescript
-import { calculateParametricVaR } from 'finlib-ts';
+import { calculateParametricVaR } from '@railpath/finance-toolkit';
 
 const parametricVaR = calculateParametricVaR({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02],
@@ -89,7 +89,7 @@ z_α = Z-Score for confidence level α
 Simulates future scenarios based on historical parameters.
 
 ```typescript
-import { calculateMonteCarloVaR } from 'finlib-ts';
+import { calculateMonteCarloVaR } from '@railpath/finance-toolkit';
 
 const monteCarloVaR = calculateMonteCarloVaR({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02],
@@ -131,7 +131,7 @@ R = Portfolio return
 ### Code Example
 
 ```typescript
-import { calculateExpectedShortfall } from 'finlib-ts';
+import { calculateExpectedShortfall } from '@railpath/finance-toolkit';
 
 const expectedShortfall = calculateExpectedShortfall({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02, -0.05, 0.01],
@@ -158,7 +158,7 @@ console.log('Expected Shortfall (95%):', expectedShortfall.expectedShortfall);
 Measures the excess return per unit of risk.
 
 ```typescript
-import { calculateSharpeRatio } from 'finlib-ts';
+import { calculateSharpeRatio } from '@railpath/finance-toolkit';
 
 const sharpe = calculateSharpeRatio({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02],
@@ -189,7 +189,7 @@ R_f = Risk-free rate
 Ähnlich wie Sharpe Ratio, aber nur für downside risk.
 
 ```typescript
-import { calculateSortinoRatio } from 'finlib-ts';
+import { calculateSortinoRatio } from '@railpath/finance-toolkit';
 
 const sortino = calculateSortinoRatio({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02],
@@ -219,7 +219,7 @@ Where:
 ### Code Example
 
 ```typescript
-import { calculateMaxDrawdown } from 'finlib-ts';
+import { calculateMaxDrawdown } from '@railpath/finance-toolkit';
 
 const maxDD = calculateMaxDrawdown({
   portfolioValues: [1000, 1100, 1050, 1200, 1150, 1000, 1100]
@@ -234,7 +234,7 @@ console.log('Max Drawdown %:', maxDD.maxDrawdownPercent); // -0.1667 (16.67%)
 Return vs. Maximum Drawdown.
 
 ```typescript
-import { calculateCalmarRatio } from 'finlib-ts';
+import { calculateCalmarRatio } from '@railpath/finance-toolkit';
 
 const calmar = calculateCalmarRatio({
   returns: [0.01, 0.02, -0.01, 0.03, -0.02],
@@ -252,7 +252,7 @@ console.log('Calmar Ratio:', calmar.calmarRatio);
 ### Correlation Matrix
 
 ```typescript
-import { calculateCorrelationMatrix } from 'finlib-ts';
+import { calculateCorrelationMatrix } from '@railpath/finance-toolkit';
 
 const correlation = calculateCorrelationMatrix({
   assetReturns: [
@@ -269,7 +269,7 @@ console.log('Correlation Matrix:', correlation.correlationMatrix);
 ### Portfolio Volatility
 
 ```typescript
-import { calculatePortfolioVolatility } from 'finlib-ts';
+import { calculatePortfolioVolatility } from '@railpath/finance-toolkit';
 
 const portfolioVol = calculatePortfolioVolatility({
   weights: [0.4, 0.3, 0.3], // Asset weights

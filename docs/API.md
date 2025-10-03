@@ -1,6 +1,6 @@
 # API Reference
 
-Complete API documentation for finlib-ts.
+Complete API documentation for @railpath/finance-toolkit.
 
 ---
 

@@ -1,6 +1,6 @@
-# finlib-ts Documentation
+# @railpath/finance-toolkit Documentation
 
-Complete documentation for the finlib-ts TypeScript library.
+Complete documentation for the @railpath/finance-toolkit TypeScript library.
 
 ---
 
@@ -46,7 +46,7 @@ Complete documentation for the finlib-ts TypeScript library.
 ### Installation
 
 ```bash
-npm install finlib-ts
+npm install @railpath/finance-toolkit
 ```
 
 ### Basic Usage
@@ -57,7 +57,7 @@ import {
   calculateMoneyWeightedReturn,
   calculateVaR,
   calculateSharpeRatio 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 // Portfolio Performance
 const twr = calculateTimeWeightedReturn({
@@ -138,7 +138,7 @@ const var95 = calculateVaR({
 import type { 
   TimeWeightedReturnOptions, 
   TimeWeightedReturnResult 
-} from 'finlib-ts';
+} from '@railpath/finance-toolkit';
 
 const options: TimeWeightedReturnOptions = {
   portfolioValues: [1000, 1100, 1200],
