@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "Publishing to npm registry using trusted publisher..."
           npm config set registry https://registry.npmjs.org/
-          npm publish --access public --provenance
+          npm publish --provenance
       
       - name: Create GitHub Release
         uses: actions/create-release@v1
