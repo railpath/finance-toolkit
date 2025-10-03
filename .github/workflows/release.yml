@@ -39,12 +39,15 @@ jobs:
       - name: Build package
         run: npm run build
       
+      - name: Configure npm registry
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" >> ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+      
       - name: Publish to npm
         run: |
-          echo "Using NPM_TOKEN for authentication"
+          echo "Publishing with automation token (no 2FA required)"
           npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
       
       - name: Create GitHub Release
         uses: actions/create-release@v1
