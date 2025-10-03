@@ -41,10 +41,20 @@ jobs:
       - name: Build package
         run: npm run build
       
-      - name: Check package existence
+      - name: Debug npm authentication
         run: |
-          echo "Checking if package exists..."
-          npm view @railpath/finance-toolkit version || echo "Package does not exist yet"
+          echo "=== NPM Authentication Debug ==="
+          echo "npm whoami:"
+          npm whoami || echo "npm whoami failed"
+          echo ""
+          echo "npm config list:"
+          npm config list || echo "npm config failed"
+          echo ""
+          echo "Checking package existence:"
+          npm view @railpath/finance-toolkit version || echo "Package not found"
+          echo ""
+          echo "Checking package access:"
+          npm access list packages @railpath || echo "Access check failed"
       
       - name: Publish to npm
         run: |
