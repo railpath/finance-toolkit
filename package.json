@@ -4,6 +4,14 @@
   "description": "Production-ready finance library for portfolio construction, risk analytics, and quantitative metrics",
   "author": "Benjamin Damm <kontakt@benjamin-damm.ch>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/railpath/finance-toolkit.git"
+  },
+  "homepage": "https://github.com/railpath/finance-toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/railpath/finance-toolkit/issues"
+  },
   "keywords": [
     "finance",
     "portfolio-management",

@@ -52,29 +52,29 @@ jobs:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
           body: |
-            ## 🚀 What's New
+            ## 🚀 @railpath/finance-toolkit ${{ github.ref_name }}
             
-            This release includes:
-            - Portfolio performance metrics
-            - Risk analytics and calculations
-            - Volatility calculations
-            - Portfolio optimization tools
-            
-            ## 📦 Installation
-            
+            ### 📦 Installation
             ```bash
-            npm install @railpath/finance-toolkit
+            npm install @railpath/finance-toolkit@${{ github.ref_name }}
             ```
             
-            ## 🔗 Links
+            ### 🔗 Links
+            - 📦 [npm Package](https://www.npmjs.com/package/@railpath/finance-toolkit)
+            - 📖 [Documentation](https://github.com/railpath/finance-toolkit#readme)
+            - 🐛 [Report Issues](https://github.com/railpath/finance-toolkit/issues)
             
-            - [npm Package](https://www.npmjs.com/package/@railpath/finance-toolkit)
-            - [Documentation](https://github.com/railpath/finance-toolkit#readme)
+            ### 📊 Package Statistics
+            - ✅ **829 Tests** - All passing
+            - 🔷 **TypeScript** - Fully typed with Zod validation
+            - 📦 **ES Modules** - Modern JavaScript support
+            - 🏗️ **Size**: 39.9 kB (177.0 kB unpacked)
             
-            ## 📊 Statistics
-            
-            - **829 Tests** - All passing
-            - **TypeScript** - Fully typed with Zod validation
-            - **ES Modules** - Modern JavaScript support
+            ### 🎯 Features
+            - Portfolio performance metrics (TWR, MWR)
+            - Risk analytics (VaR, Expected Shortfall, Sharpe Ratio)
+            - Volatility calculations (EWMA, Parkinson, Garman-Klass)
+            - Portfolio optimization and rebalancing
+            - Performance attribution analysis
           draft: false
           prerelease: false
