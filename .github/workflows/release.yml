@@ -43,6 +43,14 @@ jobs:
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" >> ~/.npmrc
           echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTOMATION_TOKEN }}" >> ~/.npmrc
+      
+      - name: Verify npm authentication
+        run: |
+          echo "Verifying npm authentication..."
+          npm whoami
+          echo "Checking package access..."
+          npm access list packages @railpath
       
       - name: Publish to npm
         run: |
