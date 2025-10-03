@@ -1,4 +1,6 @@
-# 🏔️ @railpath/finance-toolkit
+<img src="https://github.com/railpath/railpath/blob/main/railpath-logo.png" alt="Railpath" width="80" align="left">
+
+# @railpath/finance-toolkit
 
 A comprehensive TypeScript library for portfolio management and risk analytics.
 
