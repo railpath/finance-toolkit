@@ -85,7 +85,17 @@ jobs:
         if: steps.version.outputs.SHOULD_PUBLISH == 'true' && steps.version-check.outputs.EXISTS == 'false'
         run: |
           echo "Publishing version ${{ steps.version.outputs.VERSION }} to npm registry..."
+          
+          # Ensure we're using the correct registry
           npm config set registry https://registry.npmjs.org/
+          npm config set @railpath:registry https://registry.npmjs.org/
+          
+          # Verify registry configuration
+          echo "Registry configuration:"
+          npm config get registry
+          npm config get @railpath:registry
+          
+          # Publish with trusted publisher
           npm publish --provenance
       
       - name: Create Git tag
