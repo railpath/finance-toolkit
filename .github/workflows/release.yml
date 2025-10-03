@@ -41,6 +41,11 @@ jobs:
       - name: Build package
         run: npm run build
       
+      - name: Check package existence
+        run: |
+          echo "Checking if package exists..."
+          npm view @railpath/finance-toolkit version || echo "Package does not exist yet"
+      
       - name: Publish to npm
         run: |
           echo "Publishing to npm registry using trusted publisher..."
