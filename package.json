@@ -40,7 +40,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "version:patch": "npm version patch && git push && git push --tags",
+    "version:minor": "npm version minor && git push && git push --tags",
+    "version:major": "npm version major && git push && git push --tags",
+    "release:patch": "npm run test && npm run lint && npm run version:patch",
+    "release:minor": "npm run test && npm run lint && npm run version:minor",
+    "release:major": "npm run test && npm run lint && npm run version:major"
   },
   "devDependencies": {
     "@types/node": "^20.19.19",

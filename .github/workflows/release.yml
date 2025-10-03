@@ -1,0 +1,80 @@
+name: Release to npm
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on version tags like v1.0.0, v1.2.3, etc.
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+      packages: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for proper versioning
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Run linting
+        run: npm run lint
+      
+      - name: Build package
+        run: npm run build
+      
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## 🚀 What's New
+            
+            This release includes:
+            - Portfolio performance metrics
+            - Risk analytics and calculations
+            - Volatility calculations
+            - Portfolio optimization tools
+            
+            ## 📦 Installation
+            
+            ```bash
+            npm install @railpath/finance-toolkit
+            ```
+            
+            ## 🔗 Links
+            
+            - [npm Package](https://www.npmjs.com/package/@railpath/finance-toolkit)
+            - [Documentation](https://github.com/railpath/finance-toolkit#readme)
+            
+            ## 📊 Statistics
+            
+            - **829 Tests** - All passing
+            - **TypeScript** - Fully typed with Zod validation
+            - **ES Modules** - Modern JavaScript support
+          draft: false
+          prerelease: false
