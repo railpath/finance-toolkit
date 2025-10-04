@@ -34,6 +34,8 @@ Part of the [Railpath](https://github.com/railpath) open source ecosystem – bu
 - **Sortino Ratio** – Downside risk-adjusted returns
 - **Calmar Ratio** – Return vs. maximum drawdown
 - **Standard Deviation** – Classical volatility measure
+- **Semideviation** – Downside volatility measure
+- **Skewness & Kurtosis** – Distribution shape analysis
 - **VaR 95% & 99%** – Pre-configured confidence levels
 
 ### **Volatility Calculations**
@@ -224,7 +226,10 @@ console.log(result.periodReturns); // number[]
 | `calculateParametricExpectedShortfall` | Parametric ES | Normal Distribution |
 | `calculateSharpeRatio` | Risk-Adjusted Returns | Standard, Annualized |
 | `calculateSortinoRatio` | Downside Risk-Adjusted | Standard, Annualized |
+| `calculateSemideviation` | Downside Volatility | Zero/Mean Threshold |
 | `calculateCalmarRatio` | Return vs. Drawdown | Calmar Ratio |
+| `calculateSkewness` | Distribution Asymmetry | Third Moment |
+| `calculateKurtosis` | Distribution Tailedness | Fourth Moment (Excess) |
 | `calculateAlpha` | CAPM Alpha | Asset vs. Benchmark |
 | `calculateBeta` | CAPM Beta | Asset vs. Benchmark |
 | `calculateMaxDrawdown` | Maximum Loss | Peak-to-Trough Analysis |

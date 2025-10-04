@@ -21,7 +21,14 @@
     "defi",
     "tradfi",
     "risk-modeling",
-    "financial-engineering"
+    "financial-engineering",
+    "statistical-moments",
+    "skewness",
+    "kurtosis",
+    "semideviation",
+    "downside-risk",
+    "var",
+    "expected-shortfall"
   ],
   "type": "module",
   "main": "./dist/index.js",

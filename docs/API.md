@@ -199,6 +199,95 @@ function calculateMaxDrawdown(options: MaxDrawdownOptions): MaxDrawdownResult
 
 ---
 
+### `calculateSkewness`
+
+Calculates the Skewness (third moment) of a dataset.
+
+**Description**: Skewness measures the asymmetry of the distribution. Positive values indicate right-skewed distributions (long right tail), negative values indicate left-skewed distributions (long left tail), and zero indicates symmetric distribution.
+
+```typescript
+function calculateSkewness(data: number[]): number
+```
+
+**Parameters**:
+- `data: number[]` - Array of numbers to calculate skewness for
+
+**Returns**:
+- `number` - Skewness value
+
+**Example**:
+```typescript
+const returns = [0.01, 0.02, -0.01, 0.03, -0.02, -0.05, 0.01];
+const skewness = calculateSkewness(returns);
+console.log('Skewness:', skewness); // -0.234 (left-skewed)
+```
+
+---
+
+### `calculateSemideviation`
+
+Calculates the Semideviation (Downside Deviation) of a dataset.
+
+**Description**: Semideviation measures the volatility of returns below a specified threshold. It focuses only on downside risk, ignoring positive volatility, making it a key metric for downside risk assessment.
+
+```typescript
+function calculateSemideviation(options: SemideviationOptions): SemideviationResult
+```
+
+**Parameters**:
+- `returns: number[]` - Array of returns to calculate semideviation for
+- `threshold?: number` - Threshold for downside returns (default: 0)
+- `annualizationFactor?: number` - Annualization factor (default: 252)
+- `annualized?: boolean` - Whether to return annualized values (default: true)
+
+**Returns**:
+- `semideviation: number` - Period-based semideviation
+- `annualizedSemideviation: number` - Annualized semideviation
+- `downsideCount: number` - Number of downside returns
+- `downsidePercentage: number` - Percentage of downside returns
+- `threshold: number` - Threshold used
+- `meanReturn: number` - Mean return of dataset
+- `standardDeviation: number` - Standard deviation for comparison
+
+**Example**:
+```typescript
+const semideviation = calculateSemideviation({
+  returns: [0.01, -0.02, 0.03, -0.01, -0.05, 0.02],
+  threshold: 0, // Zero threshold
+  annualizationFactor: 252
+});
+
+console.log('Semideviation:', semideviation.semideviation);
+console.log('Downside %:', semideviation.downsidePercentage); // 50%
+```
+
+---
+
+### `calculateKurtosis`
+
+Calculates the Excess Kurtosis (fourth moment) of a dataset.
+
+**Description**: Kurtosis measures the "tailedness" of the distribution. Positive excess kurtosis indicates heavy tails (more extreme values than normal distribution), negative values indicate light tails, and zero indicates normal distribution.
+
+```typescript
+function calculateKurtosis(data: number[]): number
+```
+
+**Parameters**:
+- `data: number[]` - Array of numbers to calculate kurtosis for
+
+**Returns**:
+- `number` - Excess kurtosis value (kurtosis - 3)
+
+**Example**:
+```typescript
+const returns = [0.01, 0.02, -0.01, 0.03, -0.02, -0.05, 0.01];
+const kurtosis = calculateKurtosis(returns);
+console.log('Excess Kurtosis:', kurtosis); // 2.45 (fat tails)
+```
+
+---
+
 ## Volatility
 
 ### `calculateVolatility`
@@ -390,6 +479,7 @@ function inverseErf(x: number): number
 ```
 
 ---
+
 
 ## Type Definitions
 
