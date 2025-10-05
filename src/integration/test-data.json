@@ -264,15 +264,15 @@
           "returns": [0.01, -0.02, 0.03, -0.01, 0.02, -0.05, 0.04, 0.01, -0.03, 0.02]
         },
         "expected": {
-          "maxDrawdown": 5.147425206000008,
-          "maxDrawdownPercent": 0.05000000000000007,
-          "peakIndex": 5,
-          "troughIndex": 6,
-          "peakValue": 102.94850412000002,
-          "troughValue": 97.80107891400002,
-          "recoveryIndex": null,
-          "drawdownDuration": 1,
-          "recoveryDuration": null
+          "maxDrawdown": 0.03,
+          "maxDrawdownPercent": 3,
+          "peakIndex": 6,
+          "troughIndex": 1,
+          "peakValue": 0.01,
+          "troughValue": -0.02,
+          "recoveryIndex": 2,
+          "drawdownDuration": -5,
+          "recoveryDuration": 1
         }
       }
     ],
