@@ -6,7 +6,7 @@ A comprehensive TypeScript library for portfolio management and risk analytics.
 
 **@railpath/finance-toolkit** provides a complete collection of financial metrics with focus on modularity, type-safety, and performance.
 
-Part of the [Railpath](https://github.com/railpath) open source ecosystem – building financial infrastructure that belongs to everyone.
+Part of the [RailPath](https://github.com/railpath) open source ecosystem – building financial infrastructure that belongs to everyone.
 
 ---
 
