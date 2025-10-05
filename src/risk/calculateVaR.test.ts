@@ -123,7 +123,7 @@ describe('calculateVaR', () => {
     expect(result1.value).toBeCloseTo(result2.value, 10);
     expect(result1.confidenceLevel).toBe(result2.confidenceLevel);
     expect(result1.method).toBe(result2.method);
-    expect(result1.cvar).toBeCloseTo(result2.cvar, 10);
+    expect(result1.cvar).toBeCloseTo(result2.cvar!, 10);
   });
 
   it('should handle realistic portfolio scenario', () => {
@@ -203,7 +203,7 @@ describe('calculateVaR', () => {
 
   it('should throw error for unknown method', () => {
     const returns = [0.01, 0.02, 0.03, 0.04, 0.05];
-    const options = { confidenceLevel: 0.95, method: 'unknown' as any };
+    const options = { confidenceLevel: 0.95, method: 'unknown' as never };
 
     expect(() => calculateVaR(returns, options))
       .toThrow();

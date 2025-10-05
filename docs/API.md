@@ -85,6 +85,61 @@ console.log(result.annualizedMWR); // 0.12
 
 ---
 
+## Portfolio Management
+
+### `calculatePortfolioOptimization`
+
+Calculates Markowitz Mean-Variance Portfolio Optimization using Quadratic Programming.
+
+**Description**: Implements the classic Markowitz portfolio theory for optimal asset allocation using a dedicated quadratic programming solver. Supports minimum variance, maximum Sharpe ratio, and target return optimization with various constraints.
+
+```typescript
+function calculatePortfolioOptimization(options: PortfolioOptimizationOptions): PortfolioOptimizationResult
+```
+
+**Parameters**:
+- `expectedReturns: number[]` - Array of expected returns for each asset
+- `covarianceMatrix: number[][]` - Covariance matrix (n×n) for asset returns
+- `riskFreeRate?: number` - Risk-free rate for Sharpe ratio calculation (default: 0)
+- `objective?: 'minimumVariance' | 'maximumSharpe' | 'targetReturn'` - Optimization objective (default: 'minimumVariance')
+- `targetReturn?: number` - Target return for target return optimization
+- `minWeight?: number` - Minimum weight per asset (default: 0)
+- `maxWeight?: number` - Maximum weight per asset (default: 1)
+- `sumTo1?: boolean` - Whether weights must sum to 1 (default: true)
+
+**Returns**:
+- `weights: number[]` - Optimal portfolio weights
+- `expectedReturn: number` - Expected portfolio return
+- `variance: number` - Portfolio variance
+- `volatility: number` - Portfolio volatility (standard deviation)
+- `method: string` - Optimization method used
+- `converged: boolean` - Whether optimization converged
+- `iterations?: number` - Number of iterations performed
+- `sharpeRatio?: number` - Sharpe ratio (for maximum Sharpe optimization)
+
+**Example**:
+```typescript
+const optimization = calculatePortfolioOptimization({
+  expectedReturns: [0.08, 0.12, 0.15],
+  covarianceMatrix: [
+    [0.04, 0.02, 0.01],
+    [0.02, 0.09, 0.03],
+    [0.01, 0.03, 0.02]
+  ],
+  objective: 'minimumVariance',
+  minWeight: 0.1,
+  maxWeight: 0.8
+});
+
+console.log('Optimal weights:', optimization.weights);
+console.log('Expected return:', optimization.expectedReturn);
+console.log('Volatility:', optimization.volatility);
+console.log('Converged:', optimization.converged);
+console.log('Iterations:', optimization.iterations);
+```
+
+---
+
 ## Risk Metrics
 
 ### `calculateVaR`
@@ -462,6 +517,55 @@ function calculateCalmarRatio(options: CalmarRatioOptions): CalmarRatioResult
 
 ## Utility Functions
 
+### `solveQuadraticProgram`
+
+Solves Quadratic Programming problems using gradient descent with constraint projection.
+
+**Description**: A practical implementation of quadratic programming optimization suitable for portfolio optimization and other financial applications. Uses simplified gradient descent with constraint projection for robust results.
+
+```typescript
+function solveQuadraticProgram(Q: number[][], c: number[], options?: QuadraticProgramOptions): QuadraticProgramResult
+```
+
+**Parameters**:
+- `Q: number[][]` - Quadratic coefficient matrix (n×n, symmetric, positive semi-definite)
+- `c: number[]` - Linear coefficient vector (n×1)
+- `options?: QuadraticProgramOptions` - Solver options and constraints
+
+**Options**:
+- `equalityConstraints?: { A: number[][], b: number[] }` - Equality constraints: Ax = b
+- `nonNegative?: boolean` - Non-negativity constraints: x ≥ 0 (default: false)
+- `maxIterations?: number` - Maximum number of iterations (default: 1000)
+- `tolerance?: number` - Convergence tolerance (default: 1e-3)
+- `initialGuess?: number[]` - Initial guess (optional)
+
+**Returns**:
+- `solution: number[]` - Solution vector
+- `objectiveValue: number` - Final objective value
+- `converged: boolean` - Whether optimization converged
+- `iterations: number` - Number of iterations performed
+- `gradientNorm: number` - Final gradient norm
+- `constraintViolation: number` - Constraint violation (if any)
+
+**Example**:
+```typescript
+// Portfolio optimization: min wᵀΣw subject to wᵀ1=1, w≥0
+const result = solveQuadraticProgram(
+  covarianceMatrix,  // Q = Σ
+  [0, 0, 0],        // c = 0 (minimum variance)
+  {
+    equalityConstraints: { A: [[1,1,1]], b: [1] },  // wᵀ1 = 1
+    nonNegative: true,                              // w ≥ 0
+    maxIterations: 1000,
+    tolerance: 1e-4
+  }
+);
+
+console.log('Solution:', result.solution);
+console.log('Converged:', result.converged);
+console.log('Iterations:', result.iterations);
+```
+
 ### `getZScore`
 
 Calculates Z-Score for normal distribution.
@@ -476,6 +580,70 @@ Calculates inverse Error Function for statistical calculations.
 
 ```typescript
 function inverseErf(x: number): number
+```
+
+### `vectorNorm`
+
+Calculates the Euclidean norm (magnitude) of a vector.
+
+```typescript
+function vectorNorm(v: number[]): number
+```
+
+### `vectorAdd`
+
+Add two vectors element-wise.
+
+```typescript
+function vectorAdd(a: number[], b: number[]): number[]
+```
+
+### `vectorDot`
+
+Calculate the dot product (inner product) of two vectors.
+
+```typescript
+function vectorDot(a: number[], b: number[]): number
+```
+
+### `matrixVectorMultiply`
+
+Multiply a matrix by a vector.
+
+```typescript
+function matrixVectorMultiply(A: number[][], x: number[]): number[]
+```
+
+### `matrixTranspose`
+
+Calculate the transpose of a matrix.
+
+```typescript
+function matrixTranspose(A: number[][]): number[][]
+```
+
+### `solveLinearSystem`
+
+Solve a linear system Ax = b using Gaussian elimination.
+
+```typescript
+function solveLinearSystem(A: number[][], b: number[]): number[]
+```
+
+### `projectOntoEqualityConstraints`
+
+Project a solution vector onto equality constraints Ax = b.
+
+```typescript
+function projectOntoEqualityConstraints(x: number[], A: number[][], b: number[]): number[]
+```
+
+### `projectOntoNonNegativityConstraints`
+
+Project a solution vector onto non-negativity constraints x ≥ 0.
+
+```typescript
+function projectOntoNonNegativityConstraints(x: number[]): number[]
 ```
 
 ---
@@ -544,3 +712,188 @@ try {
 - `Array length mismatch` - Unequal array lengths
 - `Convergence failed` - Newton-Raphson convergence failed
 - `Invalid confidence level` - Invalid confidence level
+
+---
+
+## Utility Functions
+
+### `solveQuadraticProgram`
+
+Solves Quadratic Programming problems using gradient descent with constraint projection.
+
+**Description**: A practical implementation of quadratic programming optimization suitable for portfolio optimization and other financial applications. Uses simplified gradient descent with constraint projection for robust results.
+
+```typescript
+function solveQuadraticProgram(Q: number[][], c: number[], options?: QuadraticProgramOptions): QuadraticProgramResult
+```
+
+**Parameters**:
+- `Q: number[][]` - Quadratic coefficient matrix (n×n, symmetric, positive semi-definite)
+- `c: number[]` - Linear coefficient vector (n×1)
+- `options?: QuadraticProgramOptions` - Solver options and constraints
+
+**Options**:
+- `equalityConstraints?: { A: number[][], b: number[] }` - Equality constraints: Ax = b
+- `nonNegative?: boolean` - Non-negativity constraints: x ≥ 0 (default: false)
+- `maxIterations?: number` - Maximum number of iterations (default: 1000)
+- `tolerance?: number` - Convergence tolerance (default: 1e-3)
+- `initialGuess?: number[]` - Initial guess (optional)
+
+**Returns**:
+- `solution: number[]` - Solution vector
+- `objectiveValue: number` - Final objective value
+- `converged: boolean` - Whether optimization converged
+- `iterations: number` - Number of iterations performed
+- `gradientNorm: number` - Final gradient norm
+- `constraintViolation: number` - Constraint violation (if any)
+
+**Example**:
+```typescript
+// Portfolio optimization: min wᵀΣw subject to wᵀ1=1, w≥0
+const result = solveQuadraticProgram(
+  covarianceMatrix,  // Q = Σ
+  [0, 0, 0],        // c = 0 (minimum variance)
+  {
+    equalityConstraints: { A: [[1,1,1]], b: [1] },  // wᵀ1 = 1
+    nonNegative: true,                              // w ≥ 0
+    maxIterations: 1000,
+    tolerance: 1e-4
+  }
+);
+
+console.log('Solution:', result.solution);
+console.log('Converged:', result.converged);
+console.log('Iterations:', result.iterations);
+```
+
+---
+
+## Vector Operations
+
+Mathematical operations on vectors for use in optimization and numerical computations.
+
+### `vectorNorm`
+Calculate the Euclidean norm (magnitude) of a vector.
+
+### `vectorAdd`
+Add two vectors element-wise.
+
+### `vectorSubtract`
+Subtract two vectors element-wise.
+
+### `vectorScale`
+Scale a vector by a scalar value.
+
+### `vectorDot`
+Calculate the dot product of two vectors.
+
+### `vectorCross`
+Calculate the cross product of two 3D vectors.
+
+### `vectorNormalize`
+Normalize a vector to unit length.
+
+### `vectorDistance`
+Calculate the Euclidean distance between two vectors.
+
+### `vectorEquals`
+Check if two vectors are approximately equal.
+
+### `createZeroVector`
+Create a zero vector of specified length.
+
+### `createConstantVector`
+Create a vector filled with a constant value.
+
+---
+
+## Matrix Operations
+
+Mathematical operations on matrices for use in optimization and numerical computations.
+
+### `matrixVectorMultiply`
+Multiply a matrix by a vector.
+
+### `matrixTranspose`
+Calculate the transpose of a matrix.
+
+### `matrixMatrixMultiply`
+Multiply two matrices.
+
+### `matrixTrace`
+Calculate the trace (sum of diagonal elements) of a matrix.
+
+### `isMatrixSymmetric`
+Check if a matrix is symmetric.
+
+### `isMatrixPositiveDefinite`
+Check if a matrix is positive definite.
+
+### `createIdentityMatrix`
+Create an identity matrix of specified size.
+
+### `createZeroMatrix`
+Create a zero matrix of specified dimensions.
+
+### `matrixDiagonal`
+Extract the diagonal elements of a matrix.
+
+### `matrixFrobeniusNorm`
+Calculate the Frobenius norm of a matrix.
+
+---
+
+## Linear System Solver
+
+Functions for solving linear systems of equations.
+
+### `solveLinearSystem`
+Solve a linear system Ax = b using Gaussian elimination.
+
+### `solveMultipleLinearSystems`
+Solve multiple linear systems with the same coefficient matrix.
+
+### `matrixDeterminant`
+Calculate the determinant of a square matrix.
+
+### `luDecomposition`
+Perform LU decomposition of a matrix.
+
+### `isMatrixInvertible`
+Check if a matrix is invertible.
+
+### `matrixConditionNumber`
+Calculate the condition number of a matrix.
+
+---
+
+## Constraint Projection
+
+Functions for projecting solutions onto constraint sets.
+
+### `projectOntoEqualityConstraints`
+Project a solution onto equality constraints.
+
+### `projectOntoNonNegativityConstraints`
+Project a solution onto non-negativity constraints.
+
+### `projectOntoBoxConstraints`
+Project a solution onto box constraints.
+
+### `projectOntoSimplex`
+Project a solution onto the simplex constraint.
+
+### `projectGradientOntoEqualityConstraints`
+Project a gradient onto equality constraints.
+
+### `projectGradientOntoNonNegativityConstraints`
+Project a gradient onto non-negativity constraints.
+
+### `calculateEqualityConstraintViolation`
+Calculate the violation of equality constraints.
+
+### `calculateInequalityConstraintViolation`
+Calculate the violation of inequality constraints.
+
+### `isSolutionFeasible`
+Check if a solution satisfies all constraints.

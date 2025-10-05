@@ -1,6 +1,8 @@
 import { PortfolioOptimizationOptions, PortfolioOptimizationOptionsSchema } from '../schemas/PortfolioOptimizationOptionsSchema';
 import { PortfolioOptimizationResult, PortfolioOptimizationResultSchema } from '../schemas/PortfolioOptimizationResultSchema';
 
+import { solveQuadraticProgram } from '../utils/solveQuadraticProgram';
+
 /**
  * Calculate Markowitz Mean-Variance Portfolio Optimization
  * 
@@ -164,8 +166,7 @@ function optimizeTargetReturn(
 
 
 /**
- * Solve quadratic programming problem using simplified approach
- * For production use, consider integrating with a proper QP solver
+ * Solve quadratic programming problem using the integrated QP solver
  */
 function solveQuadraticProgramming(
   covarianceMatrix: number[][],
@@ -179,80 +180,83 @@ function solveQuadraticProgramming(
 ): PortfolioOptimizationResult {
   const n = expectedReturns.length;
   
-  // For now, use a simple equal-weight approach as baseline
-  // This ensures we get a valid result while the algorithm is being refined
-  let weights: number[];
-  
-  if (targetReturn !== undefined) {
-    // For target return, try to find weights that achieve the target
-    weights = findTargetReturnWeights(expectedReturns, targetReturn, minWeight, maxWeight, sumTo1);
-  } else {
-    // For minimum variance or maximum Sharpe, use equal weights as starting point
-    weights = new Array(n).fill(1 / n);
-  }
-  
-  // Apply constraints
-  weights = applyConstraints(weights, minWeight, maxWeight, sumTo1);
-  
-  // Calculate final metrics
-  const variance = calculatePortfolioVariance(weights, covarianceMatrix);
-  const volatility = Math.sqrt(variance);
-  const portfolioReturn = weights.reduce((sum, w, i) => sum + w * expectedReturns[i], 0);
-  
-  const result: PortfolioOptimizationResult = {
-    weights,
-    expectedReturn: portfolioReturn,
-    variance,
-    volatility,
-    method: targetReturn ? 'targetReturn' : (objective === 'maximize' ? 'maximumSharpe' : 'minimumVariance'),
-    converged: true, // Always true for simplified approach
-    iterations: 0
-  };
-  
-  if (objective === 'maximize') {
-    // Calculate Sharpe ratio for maximum Sharpe optimization
-    const riskFreeRate = linearTerm[0] !== undefined ? expectedReturns[0] - linearTerm[0] : 0;
-    result.sharpeRatio = (portfolioReturn - riskFreeRate) / volatility;
-  }
-  
-  return result;
-}
-
-
-/**
- * Find weights that achieve target return (simplified approach)
- */
-function findTargetReturnWeights(
-  expectedReturns: number[],
-  targetReturn: number,
-  minWeight: number,
-  maxWeight: number,
-  sumTo1: boolean
-): number[] {
-  const n = expectedReturns.length;
-  
-  // Simple approach: if target is achievable with equal weights, use them
-  const equalWeightReturn = expectedReturns.reduce((sum, r) => sum + r, 0) / n;
-  
-  if (Math.abs(equalWeightReturn - targetReturn) < 0.01) {
-    return new Array(n).fill(1 / n);
-  }
-  
-  // Otherwise, try to bias towards higher return assets
-  const weights = new Array(n).fill(1 / n);
-  
-  // Adjust weights based on how far each asset's return is from target
-  for (let i = 0; i < n; i++) {
-    const deviation = expectedReturns[i] - targetReturn;
-    if (deviation > 0) {
-      weights[i] += deviation * 0.1; // Increase weight for above-target assets
-    } else {
-      weights[i] -= Math.abs(deviation) * 0.1; // Decrease weight for below-target assets
+  try {
+    // Use the quadratic programming solver
+    const qpResult = solveQuadraticProgram(
+      covarianceMatrix,
+      linearTerm,
+      {
+        equalityConstraints: sumTo1 ? {
+          A: [new Array(n).fill(1)],
+          b: [1]
+        } : undefined,
+        nonNegative: minWeight >= 0,
+        maxIterations: 1000,
+        tolerance: 1e-4
+      }
+    );
+    
+    // Apply additional constraints (min/max weights)
+    let weights = qpResult.solution;
+    
+    // Apply min/max weight constraints
+    weights = weights.map(w => Math.max(minWeight, Math.min(maxWeight, w)));
+    
+    // Renormalize if sum constraint is required
+    if (sumTo1) {
+      const currentSum = weights.reduce((sum, w) => sum + w, 0);
+      if (Math.abs(currentSum) > 1e-12) {
+        weights = weights.map(w => w / currentSum);
+      }
     }
+    
+    // Calculate final metrics
+    const variance = calculatePortfolioVariance(weights, covarianceMatrix);
+    const volatility = Math.sqrt(variance);
+    const portfolioReturn = weights.reduce((sum, w, i) => sum + w * expectedReturns[i], 0);
+    
+    const result: PortfolioOptimizationResult = {
+      weights,
+      expectedReturn: portfolioReturn,
+      variance,
+      volatility,
+      method: targetReturn ? 'targetReturn' : (objective === 'maximize' ? 'maximumSharpe' : 'minimumVariance'),
+      converged: qpResult.converged,
+      iterations: qpResult.iterations
+    };
+    
+    if (objective === 'maximize') {
+      // Calculate Sharpe ratio for maximum Sharpe optimization
+      const riskFreeRate = linearTerm[0] !== undefined ? expectedReturns[0] - linearTerm[0] : 0;
+      result.sharpeRatio = volatility > 0 ? (portfolioReturn - riskFreeRate) / volatility : 0;
+    }
+    
+    return result;
+    
+  } catch (error) {
+    // Fallback to equal weights if QP solver fails
+    console.warn('QP solver failed, falling back to equal weights:', error);
+    
+    let weights = new Array(n).fill(1 / n);
+    
+    // Apply constraints
+    weights = applyConstraints(weights, minWeight, maxWeight, sumTo1);
+    
+    // Calculate final metrics
+    const variance = calculatePortfolioVariance(weights, covarianceMatrix);
+    const volatility = Math.sqrt(variance);
+    const portfolioReturn = weights.reduce((sum, w, i) => sum + w * expectedReturns[i], 0);
+    
+    return {
+      weights,
+      expectedReturn: portfolioReturn,
+      variance,
+      volatility,
+      method: targetReturn ? 'targetReturn' : (objective === 'maximize' ? 'maximumSharpe' : 'minimumVariance'),
+      converged: false,
+      iterations: 0
+    };
   }
-  
-  // Apply constraints
-  return applyConstraints(weights, minWeight, maxWeight, sumTo1);
 }
 
 /**

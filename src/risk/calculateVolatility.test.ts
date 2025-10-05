@@ -202,7 +202,7 @@ describe('calculateVolatility', () => {
 
   it('should throw error for unknown method', () => {
     const returns = [0.01, 0.02, 0.03, 0.04, 0.05];
-    const options = { method: 'unknown' as any };
+    const options = { method: 'unknown' as never };
 
     expect(() => calculateVolatility(returns, options))
       .toThrow('Unknown volatility method: unknown');

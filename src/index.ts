@@ -41,6 +41,59 @@ export { calculateTrackingError } from './portfolio/calculateTrackingError';
 // Utility Functions
 export { getZScore } from './utils/getZScore';
 export { inverseErf } from './utils/inverseErf';
+export { solveQuadraticProgram } from './utils/solveQuadraticProgram';
+
+// Vector Operations
+export { 
+  vectorNorm, 
+  vectorAdd, 
+  vectorSubtract, 
+  vectorScale, 
+  vectorDot,
+  vectorCross,
+  vectorNormalize,
+  vectorDistance,
+  vectorEquals,
+  createZeroVector,
+  createConstantVector
+} from './utils/vectorOperations';
+
+// Matrix Operations
+export { 
+  matrixVectorMultiply,
+  matrixTranspose,
+  matrixMatrixMultiply,
+  matrixTrace,
+  isMatrixSymmetric,
+  isMatrixPositiveDefinite,
+  createIdentityMatrix,
+  createZeroMatrix,
+  matrixDiagonal,
+  matrixFrobeniusNorm
+} from './utils/matrixOperations';
+
+// Linear System Solver
+export { 
+  solveLinearSystem,
+  solveMultipleLinearSystems,
+  matrixDeterminant,
+  luDecomposition,
+  isMatrixInvertible,
+  matrixConditionNumber
+} from './utils/linearSystemSolver';
+
+// Constraint Projection
+export { 
+  projectOntoEqualityConstraints,
+  projectOntoNonNegativityConstraints,
+  projectOntoBoxConstraints,
+  projectOntoSimplex,
+  projectGradientOntoEqualityConstraints,
+  projectGradientOntoNonNegativityConstraints,
+  calculateEqualityConstraintViolation,
+  calculateInequalityConstraintViolation,
+  isSolutionFeasible
+} from './utils/constraintProjection';
 
 // Type Exports
 export type { AlphaOptions } from './schemas/AlphaOptionsSchema';
@@ -91,3 +144,11 @@ export type { InformationRatioOptions } from './schemas/InformationRatioOptionsS
 export type { InformationRatioResult } from './schemas/InformationRatioResultSchema';
 export type { TrackingErrorOptions } from './schemas/TrackingErrorOptionsSchema';
 export type { TrackingErrorResult } from './schemas/TrackingErrorResultSchema';
+
+// Risk Type Exports (New Functions)
+export type { SemideviationOptions } from './schemas/SemideviationOptionsSchema';
+export type { SemideviationResult } from './schemas/SemideviationResultSchema';
+
+// Utility Type Exports
+export type { QuadraticProgramOptions } from './schemas/QuadraticProgramOptionsSchema';
+export type { QuadraticProgramResult } from './schemas/QuadraticProgramResultSchema';
