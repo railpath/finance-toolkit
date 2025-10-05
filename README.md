@@ -270,6 +270,10 @@ npm run test:coverage
 
 **Test Coverage**: 1016 Tests across 42 test files
 
+### Battle Testing
+
+This library uses a comprehensive battle testing approach to ensure accuracy by comparing TypeScript implementations against Python equivalents using battle-tested libraries (numpy, scipy, pandas). See [testing/README.md](testing/README.md) for details on the battle testing framework.
+
 ---
 
 ## Build

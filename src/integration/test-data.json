@@ -1,0 +1,692 @@
+{
+  "metadata": {
+    "description": "Working test data for Finance Toolkit - Functions that work correctly",
+    "version": "1.0.0",
+    "created": "2025-10-05",
+    "purpose": "Battle testing TypeScript vs Python implementations"
+  },
+  "test_cases": {
+    "calculateAlpha": [
+      {
+        "test_name": "basic_alpha",
+        "description": "Basic alpha calculation",
+        "input": {
+          "assetReturns": [0.01, 0.02, -0.01, 0.03, 0.01],
+          "benchmarkReturns": [0.015, 0.018, -0.008, 0.025, 0.012],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "alpha": -0.002465494569212766,
+          "annualizedAlpha": -0.6213046314416171,
+          "beta": 1.1676451402478798,
+          "assetReturn": 3.024,
+          "benchmarkReturn": 3.1248,
+          "expectedReturn": 3.645304631441617
+        }
+      }
+    ],
+    "calculateBeta": [
+      {
+        "test_name": "basic_beta",
+        "description": "Basic beta calculation",
+        "input": {
+          "assetReturns": [0.01, 0.02, -0.01, 0.03, 0.01],
+          "benchmarkReturns": [0.015, 0.018, -0.008, 0.025, 0.012]
+        },
+        "expected": {
+          "beta": 1.1676451402478798,
+          "covariance": 0.00017900000000000001,
+          "benchmarkVariance": 0.00015330000000000004,
+          "correlation": 0.9746992079246586
+        }
+      }
+    ],
+    "calculateSharpeRatio": [
+      {
+        "test_name": "positive_returns",
+        "description": "Basic Sharpe ratio with positive returns",
+        "input": {
+          "returns": [0.01, 0.02, 0.03, 0.04, 0.05],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "sharpeRatio": 30.04007904793777,
+          "annualizedReturn": 7.560000000000001,
+          "annualizedVolatility": 0.25099800796022265,
+          "excessReturn": 7.540000000000002
+        }
+      },
+      {
+        "test_name": "negative_returns",
+        "description": "Sharpe ratio with negative returns",
+        "input": {
+          "returns": [-0.01, -0.02, -0.03, -0.04, -0.05],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "sharpeRatio": -30.199442862515685,
+          "annualizedReturn": -7.560000000000001,
+          "annualizedVolatility": 0.25099800796022265,
+          "excessReturn": -7.580000000000001
+        }
+      },
+      {
+        "test_name": "mixed_returns",
+        "description": "Realistic portfolio with mixed returns",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "sharpeRatio": 9.514717838050727,
+          "annualizedReturn": 3.024,
+          "annualizedVolatility": 0.31572139617073786,
+          "excessReturn": 3.004
+        }
+      }
+    ],
+    "calculateSortinoRatio": [
+      {
+        "test_name": "basic_sortino",
+        "description": "Basic Sortino ratio calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03],
+          "riskFreeRate": 0.02,
+          "targetReturn": 0.0,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "sortinoRatio": 24.430031826144944,
+          "annualizedReturn": 3.024,
+          "downsideDeviation": 0.007745966692414835,
+          "annualizedDownsideDeviation": 0.1229634091915152,
+          "excessReturn": 3.004
+        }
+      }
+    ],
+    "calculateInformationRatio": [
+      {
+        "test_name": "basic_information_ratio",
+        "description": "Basic information ratio calculation",
+        "input": {
+          "portfolioReturns": [0.01, 0.02, -0.01, 0.03, 0.01],
+          "benchmarkReturns": [0.015, 0.018, -0.008, 0.025, 0.012]
+        },
+        "expected": {
+          "informationRatio": -1.6233588998268558,
+          "informationRatioPeriod": -0.10226199851298276,
+          "meanExcessReturn": -0.1008,
+          "meanExcessReturnPeriod": -0.0004,
+          "trackingError": 0.062093477918377216,
+          "trackingErrorPeriod": 0.003911521443121588,
+          "excessReturns": [-0.004999999999999999, 0.0020000000000000018, -0.002, 0.0049999999999999975, -0.002],
+          "periods": 5,
+          "annualizationFactor": 252,
+          "method": "sample"
+        }
+      }
+    ],
+    "calculateMoneyWeightedReturn": [
+      {
+        "test_name": "basic_mwr",
+        "description": "Basic money-weighted return calculation",
+        "input": {
+          "cashFlows": [-1000, 100],
+          "dates": ["2023-01-01", "2023-12-31"],
+          "finalValue": 1200,
+          "initialValue": 0,
+          "maxIterations": 100,
+          "tolerance": 1e-6
+        },
+        "expected": {
+          "mwr": 0.3011717968389194,
+          "annualizedMWR": 0.3023486793904775,
+          "cashFlowCount": 3,
+          "timePeriodYears": 0.9965776865160849,
+          "npv": 1.0379608283983544e-10,
+          "iterations": 100
+        }
+      }
+    ],
+    "calculateTimeWeightedReturn": [
+      {
+        "test_name": "basic_twr",
+        "description": "Basic time-weighted return calculation",
+        "input": {
+          "portfolioValues": [1000, 1100, 1200, 1150],
+          "cashFlows": [0, 100, -50, 0],
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "twr": 0.09523809523809512,
+          "annualizedTWR": 2082.1352494564803,
+          "periods": 3,
+          "periodReturns": [0, 0.14285714285714285, -0.041666666666666664]
+        }
+      }
+    ],
+    "calculateVaR": [
+      {
+        "test_name": "historical_var_95",
+        "description": "Historical VaR at 95% confidence",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+          "confidenceLevel": 0.95,
+          "method": "historical"
+        },
+        "expected": {
+          "value": 0.05,
+          "confidenceLevel": 0.95,
+          "method": "historical",
+          "cvar": 0.05
+        }
+      },
+      {
+        "test_name": "parametric_var_95",
+        "description": "Parametric VaR at 95% confidence",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+          "confidenceLevel": 0.95,
+          "method": "parametric"
+        },
+        "expected": {
+          "value": 0.045632594360409715,
+          "confidenceLevel": 0.95,
+          "method": "parametric",
+          "cvar": 0.06198656916655147
+        }
+      }
+    ],
+    "calculateReturns": [
+      {
+        "test_name": "simple_returns",
+        "description": "Simple returns calculation",
+        "input": {
+          "prices": [100, 105, 110, 108, 115],
+          "method": "simple"
+        },
+        "expected": {
+          "method": "simple",
+          "returns": [0.05, 0.047619047619047616, -0.01818181818181818, 0.06481481481481481],
+          "periods": 4,
+          "annualizationFactor": 252,
+          "annualized": false,
+          "meanReturn": 0.03606301106301106,
+          "standardDeviation": 0.032003708223802455,
+          "totalReturn": 0.15000000000000013
+        }
+      },
+      {
+        "test_name": "log_returns",
+        "description": "Log returns calculation",
+        "input": {
+          "prices": [100, 105, 110, 108, 115],
+          "method": "log"
+        },
+        "expected": {
+          "method": "log",
+          "returns": [0.04879016416943205, 0.04652001563489291, -0.01834913866819654, 0.06280090123903044],
+          "periods": 4,
+          "annualizationFactor": 252,
+          "annualized": false,
+          "meanReturn": 0.03494048559378972,
+          "standardDeviation": 0.03139222008129827,
+          "totalLogReturn": 0.13976194237515888
+        }
+      }
+    ],
+    "calculateVolatility": [
+      {
+        "test_name": "standard_volatility",
+        "description": "Standard volatility calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03],
+          "method": "standard",
+          "annualized": true,
+          "annualizationFactor": 252
+        },
+        "expected": {
+          "value": 0.019888578520235064,
+          "method": "standard",
+          "annualized": 0.31572139617073786
+        }
+      }
+    ],
+    "calculateMaxDrawdown": [
+      {
+        "test_name": "basic_drawdown",
+        "description": "Basic maximum drawdown calculation",
+        "input": {
+          "returns": [0.01, -0.02, 0.03, -0.01, 0.02, -0.05, 0.04, 0.01, -0.03, 0.02]
+        },
+        "expected": {
+          "maxDrawdown": 5.147425206000008,
+          "maxDrawdownPercent": 0.05000000000000007,
+          "peakIndex": 5,
+          "troughIndex": 6,
+          "peakValue": 102.94850412000002,
+          "troughValue": 97.80107891400002,
+          "recoveryIndex": null,
+          "drawdownDuration": 1,
+          "recoveryDuration": null
+        }
+      }
+    ],
+    "calculateCalmarRatio": [
+      {
+        "test_name": "basic_calmar",
+        "description": "Basic Calmar ratio calculation",
+        "input": {
+          "prices": [100, 110, 105, 120, 115, 130],
+          "returns": [0.10, -0.045, 0.143, -0.042, 0.130],
+          "annualizationFactor": 12
+        },
+        "expected": {
+          "calmarRatio": 15.100800000000003,
+          "annualizedReturn": 0.6864000000000001,
+          "maxDrawdownPercent": 0.045454545454545456
+        }
+      }
+    ],
+    "calculateKurtosis": [
+      {
+        "test_name": "basic_kurtosis",
+        "description": "Basic kurtosis calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03]
+        },
+        "expected": {
+          "kurtosis": 1.8541850776417117,
+          "excessKurtosis": -1.1458149223582883
+        }
+      }
+    ],
+    "calculateSkewness": [
+      {
+        "test_name": "basic_skewness",
+        "description": "Basic skewness calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03]
+        },
+        "expected": {
+          "skewness": -0.28941515150735436
+        }
+      }
+    ],
+    "calculateSemideviation": [
+      {
+        "test_name": "basic_semideviation",
+        "description": "Basic semideviation calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03],
+          "targetReturn": 0.0
+        },
+        "expected": {
+          "semideviation": 0.007745966692414835,
+          "annualizedSemideviation": 0.1229634091915152,
+          "downsideCount": 3,
+          "totalCount": 10,
+          "downsidePercentage": 30,
+          "threshold": 0,
+          "annualizationFactor": 252,
+          "meanReturn": 0.012,
+          "standardDeviation": 0.019888578520235064
+        }
+      }
+    ],
+    "calculateStandardDeviation": [
+      {
+        "test_name": "basic_std_dev",
+        "description": "Basic standard deviation calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03]
+        },
+        "expected": {
+          "standardDeviation": 0.01886796226411321,
+          "annualizedStandardDeviation": 0.2995196153843685
+        }
+      }
+    ],
+    "calculatePortfolioVolatility": [
+      {
+        "test_name": "basic_portfolio_volatility",
+        "description": "Basic portfolio volatility calculation",
+        "input": {
+          "weights": [0.4, 0.6],
+          "covarianceMatrix": [[0.04, 0.02], [0.02, 0.09]]
+        },
+        "expected": {
+          "portfolioVolatility": 0.22,
+          "annualizedPortfolioVolatility": 3.49239173060526,
+          "portfolioVariance": 0.0484
+        }
+      }
+    ],
+    "calculateVaR95": [
+      {
+        "test_name": "basic_var_95",
+        "description": "Basic VaR at 95% confidence",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07]
+        },
+        "expected": {
+          "value": 0.05,
+          "confidenceLevel": 0.95,
+          "method": "historical",
+          "cvar": 0.05
+        }
+      }
+    ],
+    "calculateVaR99": [
+      {
+        "test_name": "basic_var_99",
+        "description": "Basic VaR at 99% confidence",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07]
+        },
+        "expected": {
+          "value": 0.05,
+          "confidenceLevel": 0.99,
+          "method": "historical",
+          "cvar": 0.05
+        }
+      }
+    ],
+    "calculateTrackingError": [
+      {
+        "test_name": "basic_tracking_error",
+        "description": "Basic tracking error calculation",
+        "input": {
+          "portfolioReturns": [0.01, 0.02, -0.01, 0.03, 0.01],
+          "benchmarkReturns": [0.015, 0.018, -0.008, 0.025, 0.012]
+        },
+        "expected": {
+          "trackingError": 0.062093477918377216,
+          "trackingErrorPeriod": 0.003911521443121588,
+          "excessReturns": [
+            -0.004999999999999999,
+            0.0020000000000000018,
+            -0.002,
+            0.0049999999999999975,
+            -0.002
+          ],
+          "meanExcessReturn": -0.0004,
+          "periods": 5,
+          "annualizationFactor": 252,
+          "method": "sample"
+        }
+      }
+    ],
+    "calculateEWMAVolatility": [
+      {
+        "test_name": "basic_ewma_volatility",
+        "description": "Basic EWMA volatility calculation",
+        "input": {
+          "returns": [0.01, 0.02, -0.01, 0.03, 0.01, -0.02, 0.04, 0.02, -0.01, 0.03],
+          "lambda": 0.94
+        },
+        "expected": {
+          "volatility": 0.017227792419936674,
+          "variance": 0.0002967968316644276,
+          "lambda": 0.94,
+          "periods": 10
+        }
+      }
+    ],
+    "calculateGarmanKlassVolatility": [
+      {
+        "test_name": "basic_garman_klass_volatility",
+        "description": "Basic Garman-Klass volatility calculation",
+        "input": {
+          "openPrices": [100, 102, 105, 103, 108, 107],
+          "highPrices": [102, 105, 107, 106, 110, 109],
+          "lowPrices": [100, 101, 103, 102, 106, 105],
+          "closePrices": [102, 104, 106, 105, 108, 107]
+        },
+        "expected": {
+          "volatility": 0.023544957686566895,
+          "variance": 0.0005543650324622255,
+          "periods": 6
+        }
+      }
+    ],
+    "calculateParkinsonVolatility": [
+      {
+        "test_name": "basic_parkinson_volatility",
+        "description": "Basic Parkinson volatility calculation",
+        "input": {
+          "highPrices": [102, 105, 103, 108, 107, 110],
+          "lowPrices": [100, 102, 101, 106, 105, 108]
+        },
+        "expected": {
+          "volatility": 0.012642776016746824,
+          "variance": 0.0001598397854096287,
+          "periods": 6
+        }
+      }
+    ],
+    "calculateCorrelationMatrix": [
+      {
+        "test_name": "basic_correlation_matrix",
+        "description": "Basic correlation matrix calculation",
+        "input": {
+          "returnsMatrix": [
+            [0.01, 0.02, -0.01, 0.03, 0.01],
+            [0.015, 0.018, -0.008, 0.025, 0.012],
+            [0.02, 0.01, -0.02, 0.04, 0.015]
+          ]
+        },
+        "expected": {
+          "correlationMatrix": [[0.9999999999999999, 0.9746992079246586, 0.909631729847767], [0.9746992079246586, 1.0, 0.9444043031788684], [0.9096317298477671, 0.9444043031788684, 1.0]],
+          "assets": 3,
+          "periods": 5
+        }
+      }
+    ],
+    "calculateCovarianceMatrix": [
+      {
+        "test_name": "basic_covariance_matrix",
+        "description": "Basic covariance matrix calculation",
+        "input": {
+          "returnsMatrix": [
+            [0.01, 0.02, -0.01, 0.03, 0.01],
+            [0.015, 0.018, -0.008, 0.025, 0.012],
+            [0.02, 0.01, -0.02, 0.04, 0.015]
+          ]
+        },
+        "expected": {
+          "covarianceMatrix": [[0.00021999999999999998, 0.00017900000000000001, 0.00029249999999999995], [0.00017900000000000001, 0.00015330000000000004, 0.00025350000000000004], [0.00029249999999999995, 0.00025350000000000004, 0.00047000000000000004]],
+          "assets": 3,
+          "periods": 5
+        }
+      }
+    ],
+    "calculateHistoricalExpectedShortfall": [
+      {
+        "test_name": "basic_historical_expected_shortfall",
+        "description": "Basic historical expected shortfall calculation",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+          "confidenceLevel": 0.95
+        },
+        "expected": {
+          "expectedShortfall": 0.05,
+          "confidenceLevel": 0.95,
+          "varThreshold": 0.05,
+          "tailReturns": 1,
+          "totalReturns": 10
+        }
+      }
+    ],
+    "calculateParametricExpectedShortfall": [
+      {
+        "test_name": "basic_parametric_expected_shortfall",
+        "description": "Basic parametric expected shortfall calculation",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+          "confidenceLevel": 0.95
+        },
+        "expected": {
+          "expectedShortfall": 0.06198656916655147,
+          "confidenceLevel": 0.95,
+          "meanReturn": 0.019,
+          "stdReturn": 0.039285281382896234,
+          "zScore": 1.645211440143815
+        }
+      }
+    ],
+    "calculateMonteCarloVaR": [
+      {
+        "test_name": "basic_monte_carlo_var",
+        "description": "Basic Monte Carlo VaR calculation",
+        "input": {
+          "returns": [-0.05, -0.03, -0.01, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07],
+          "confidenceLevel": 0.95,
+          "simulations": 10000
+        },
+        "expected": {
+          "var": 0.046011510002609946,
+          "expectedShortfall": 0.06253178375206249,
+          "confidenceLevel": 0.95,
+          "simulations": 10000,
+          "meanReturn": 0.019,
+          "stdReturn": 0.039285281382896234
+        }
+      }
+    ],
+    "calculatePortfolioMetrics": [
+      {
+        "test_name": "basic_portfolio_metrics",
+        "description": "Basic portfolio metrics calculation",
+        "input": {
+          "portfolioValues": [100000, 105000, 108000, 102000, 110000],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 12,
+          "confidenceLevel": 0.95
+        },
+        "expected": {
+          "totalReturn": 0.1,
+          "cagr": 0.3310000000000004,
+          "maxDrawdown": 6000,
+          "maxDrawdownPercent": 0.05555555555555555,
+          "currentDrawdown": 0,
+          "currentDrawdownPercent": 0,
+          "meanReturn": 0.3043417366946779,
+          "volatility": 0.17304340994772838,
+          "sharpeRatio": 1.6431815391326932,
+          "sortinoRatio": 0,
+          "var": 0,
+          "expectedShortfall": 0,
+          "periods": 5,
+          "initialValue": 100000,
+          "finalValue": 110000
+        }
+      }
+    ],
+    "calculateRiskMetrics": [
+      {
+        "test_name": "basic_risk_metrics",
+        "description": "Basic risk metrics calculation",
+        "input": {
+          "assetReturns": [
+            [0.05, 0.03, 0.07, 0.02],
+            [0.04, 0.02, 0.06, 0.01],
+            [0.06, 0.04, 0.08, 0.03]
+          ],
+          "benchmarkReturns": [0.04, 0.03, 0.06, 0.02],
+          "riskFreeRate": 0.02,
+          "annualizationFactor": 252,
+          "confidenceLevel": 0.0
+        },
+        "expected": {
+          "betas": [1.2857142857142858, 1.2857142857142856, 1.2857142857142856],
+          "correlationMatrix": [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0], [1.0, 1.0, 1.0]],
+          "downsideDeviations": [0, 0, 0],
+          "downsideDeviationsAnnualized": [0, 0, 0],
+          "assets": 3,
+          "periods": 4,
+          "annualizationFactor": 252,
+          "confidenceLevel": 0.0,
+          "riskFreeRate": 0.02
+        }
+      }
+    ],
+    "calculatePortfolioOptimization": [
+      {
+        "test_name": "basic_portfolio_optimization",
+        "description": "Basic portfolio optimization calculation",
+        "input": {
+          "expectedReturns": [0.08, 0.12, 0.06],
+          "covarianceMatrix": [[0.04, 0.02, 0.01], [0.02, 0.09, 0.03], [0.01, 0.03, 0.02]],
+          "riskFreeRate": 0.03,
+          "method": "minimumVariance"
+        },
+        "expected": {
+          "optimalWeights": [0.20833333333333331, 0.0, 0.7916666666666666],
+          "expectedReturn": 0.06416666666666666,
+          "volatility": 0.13254978100489054,
+          "sharpeRatio": 0.2577647915193919,
+          "method": "minimumVariance",
+          "assets": 3
+        }
+      }
+    ],
+    "calculateEqualWeightPortfolio": [
+      {
+        "test_name": "basic_equal_weight_portfolio",
+        "description": "Basic equal weight portfolio calculation",
+        "input": {
+          "assets": 5
+        },
+        "expected": {
+          "weights": [0.2, 0.2, 0.2, 0.2, 0.2],
+          "assets": 5,
+          "weight": 0.2
+        }
+      }
+    ],
+    "calculatePerformanceAttribution": [
+      {
+        "test_name": "basic_performance_attribution",
+        "description": "Basic performance attribution calculation",
+        "input": {
+          "portfolioReturns": [0.01, 0.02, -0.01, 0.03, 0.01],
+          "benchmarkReturns": [0.015, 0.018, -0.008, 0.025, 0.012],
+          "sectorReturns": [[0.01, 0.02, -0.01, 0.03, 0.01], [0.015, 0.018, -0.008, 0.025, 0.012]],
+          "sectorWeights": [0.6, 0.4]
+        },
+        "expected": {
+          "totalAttribution": 0.0,
+          "allocationEffect": 0.0,
+          "selectionEffect": 0.0,
+          "interactionEffect": 0,
+          "excessReturns": [-0.004999999999999999, 0.0020000000000000018, -0.002, 0.0049999999999999975, -0.002],
+          "sectors": 2
+        }
+      }
+    ],
+    "calculatePortfolioRebalancing": [
+      {
+        "test_name": "basic_portfolio_rebalancing",
+        "description": "Basic portfolio rebalancing calculation",
+        "input": {
+          "initialWeights": [0.4, 0.6],
+          "targetWeights": [0.5, 0.5],
+          "currentValues": [40000, 60000]
+        },
+        "expected": {
+          "rebalancingTrades": [10000.0, -10000.0],
+          "totalTrades": 20000.0,
+          "rebalancingCost": 20.0,
+          "currentWeights": [0.4, 0.6],
+          "targetWeights": [0.5, 0.5],
+          "totalValue": 100000
+        }
+      }
+    ]
+  }
+}

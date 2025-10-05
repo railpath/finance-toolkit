@@ -51,8 +51,8 @@ export function calculateAlpha(options: AlphaOptions): AlphaResult {
     periodRiskFreeRate + beta * (benchmarkMeanReturn - periodRiskFreeRate);
 
   // Alpha
-  const alpha = assetMeanReturn - periodExpectedReturn;
   const annualizedAlpha = assetReturn - expectedReturn;
+  const alpha = annualizedAlpha / annualizationFactor;
 
   return AlphaResultSchema.parse({
     alpha,
