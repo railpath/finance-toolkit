@@ -65,6 +65,11 @@ Part of the [RailPath](https://github.com/railpath) open source ecosystem – bu
 
 ---
 
+## Language Support
+
+Written in TypeScript, works seamlessly in JavaScript projects.
+Type definitions included for IDE autocomplete.
+
 ## Installation
 
 ```bash
