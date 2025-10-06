@@ -41,7 +41,10 @@ Part of the [RailPath](https://github.com/railpath) open source ecosystem – bu
 ### **Technical Indicators**
 - **SMA (Simple Moving Average)** – Trend-following indicator
 - **EMA (Exponential Moving Average)** – Weighted trend indicator
+- **MACD (Moving Average Convergence Divergence)** – Trend momentum indicator
 - **RSI (Relative Strength Index)** – Momentum oscillator (0-100)
+- **Stochastic Oscillator** – Momentum indicator (%K, %D)
+- **Williams %R** – Momentum oscillator (-100 to 0)
 - **Bollinger Bands** – Volatility-based price channels
 - **ATR (Average True Range)** – Volatility measurement
 
@@ -152,7 +155,10 @@ const portfolioVol = calculatePortfolioVolatility({
 import { 
   calculateSMA, 
   calculateEMA, 
+  calculateMACD,
   calculateRSI, 
+  calculateStochastic,
+  calculateWilliamsR,
   calculateBollingerBands, 
   calculateATR 
 } from '@railpath/finance-toolkit';
@@ -169,9 +175,34 @@ const ema = calculateEMA({
   period: 5
 });
 
+// MACD (Moving Average Convergence Divergence)
+const macd = calculateMACD({
+  prices: [100, 102, 101, 103, 105, 104, 106, 107, 108, 109, 110, 111, 112, 113, 114],
+  fastPeriod: 12,
+  slowPeriod: 26,
+  signalPeriod: 9
+});
+
 // Relative Strength Index (RSI)
 const rsi = calculateRSI({
   prices: [100, 102, 101, 103, 105, 104, 106],
+  period: 14
+});
+
+// Stochastic Oscillator
+const stochastic = calculateStochastic({
+  high: [102, 103, 101, 104, 105, 106, 107],
+  low: [98, 99, 97, 100, 101, 102, 103],
+  close: [100, 102, 100, 103, 104, 105, 106],
+  kPeriod: 14,
+  dPeriod: 3
+});
+
+// Williams %R
+const williamsR = calculateWilliamsR({
+  high: [102, 103, 101, 104, 105, 106, 107],
+  low: [98, 99, 97, 100, 101, 102, 103],
+  close: [100, 102, 100, 103, 104, 105, 106],
   period: 14
 });
 
@@ -216,9 +247,9 @@ const atr = calculateATR({
 - Asset allocation optimization
 
 ### **Technical Analyst**
-- Trend analysis with moving averages
-- Momentum indicators for market timing
-- Volatility-based trading signals
+- Trend analysis with SMA, EMA, and MACD
+- Momentum indicators (RSI, Stochastic, Williams %R) for market timing
+- Volatility-based trading signals with Bollinger Bands and ATR
 
 ---
 
@@ -259,6 +290,19 @@ const smaResult: SMAResult = calculateSMA(smaOptions);
 console.log(smaResult.sma); // number[]
 console.log(smaResult.count); // number
 console.log(smaResult.indices); // number[]
+
+// MACD with multiple periods
+const macdOptions: MACDOptions = {
+  prices: [100, 102, 101, 103, 105, 104, 106],
+  fastPeriod: 12,
+  slowPeriod: 26,
+  signalPeriod: 9
+};
+
+const macdResult: MACDResult = calculateMACD(macdOptions);
+console.log(macdResult.macdLine); // number[]
+console.log(macdResult.signalLine); // number[]
+console.log(macdResult.histogram); // number[]
 ```
 
 ### Schema Architecture
@@ -349,7 +393,10 @@ This provides:
 |----------|-------------|-------|--------|
 | `calculateSMA` | Simple Moving Average | Prices Array, Period | SMA Values, Indices |
 | `calculateEMA` | Exponential Moving Average | Prices Array, Period | EMA Values, Smoothing Factor |
+| `calculateMACD` | Moving Average Convergence Divergence | Prices Array, Fast/Slow/Signal Periods | MACD Line, Signal Line, Histogram |
 | `calculateRSI` | Relative Strength Index | Prices Array, Period | RSI Values (0-100), Gains/Losses |
+| `calculateStochastic` | Stochastic Oscillator | High/Low/Close Arrays, K/D Periods | %K, %D, Highest High, Lowest Low |
+| `calculateWilliamsR` | Williams %R | High/Low/Close Arrays, Period | Williams %R Values (-100 to 0) |
 | `calculateBollingerBands` | Bollinger Bands | Prices Array, Period, StdDev Multiplier | Upper/Middle/Lower Bands, %B |
 | `calculateATR` | Average True Range | High/Low/Close Arrays, Period | ATR Values, True Range |
 
@@ -374,7 +421,7 @@ npm run test:integration
 npm run test:integration:watch
 ```
 
-**Test Coverage**: 1124 Tests across 50 test files
+**Test Coverage**: 1160 Tests across 53 test files
 
 ### Battle Testing
 

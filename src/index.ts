@@ -1,9 +1,12 @@
 // Technical Indicators - Trend
 export { calculateSMA } from './indicators/trend/calculateSMA';
 export { calculateEMA } from './indicators/trend/calculateEMA';
+export { calculateMACD } from './indicators/trend/calculateMACD';
 
 // Technical Indicators - Momentum
 export { calculateRSI } from './indicators/momentum/calculateRSI';
+export { calculateStochastic } from './indicators/momentum/calculateStochastic';
+export { calculateWilliamsR } from './indicators/momentum/calculateWilliamsR';
 
 // Technical Indicators - Volatility
 export { calculateBollingerBands } from './indicators/volatility/calculateBollingerBands';
@@ -107,16 +110,22 @@ export {
 } from './utils/constraintProjection';
 
 // Technical Indicator Type Exports
-export type { SMAOptions } from './schemas/indicators/SMAOptionsSchema';
-export type { SMAResult } from './schemas/indicators/SMAResultSchema';
-export type { EMAOptions } from './schemas/indicators/EMAOptionsSchema';
-export type { EMAResult } from './schemas/indicators/EMAResultSchema';
-export type { RSIOptions } from './schemas/indicators/RSIOptionsSchema';
-export type { RSIResult } from './schemas/indicators/RSIResultSchema';
-export type { BollingerBandsOptions } from './schemas/indicators/BollingerBandsOptionsSchema';
-export type { BollingerBandsResult } from './schemas/indicators/BollingerBandsResultSchema';
-export type { ATROptions } from './schemas/indicators/ATROptionsSchema';
-export type { ATRResult } from './schemas/indicators/ATRResultSchema';
+export type { SMAOptions } from './schemas/SMAOptionsSchema';
+export type { SMAResult } from './schemas/SMAResultSchema';
+export type { EMAOptions } from './schemas/EMAOptionsSchema';
+export type { EMAResult } from './schemas/EMAResultSchema';
+export type { MACDOptions } from './schemas/MACDOptionsSchema';
+export type { MACDResult } from './schemas/MACDResultSchema';
+export type { RSIOptions } from './schemas/RSIOptionsSchema';
+export type { RSIResult } from './schemas/RSIResultSchema';
+export type { StochasticOptions } from './schemas/StochasticOptionsSchema';
+export type { StochasticResult } from './schemas/StochasticResultSchema';
+export type { WilliamsROptions } from './schemas/WilliamsROptionsSchema';
+export type { WilliamsRResult } from './schemas/WilliamsRResultSchema';
+export type { BollingerBandsOptions } from './schemas/BollingerBandsOptionsSchema';
+export type { BollingerBandsResult } from './schemas/BollingerBandsResultSchema';
+export type { ATROptions } from './schemas/ATROptionsSchema';
+export type { ATRResult } from './schemas/ATRResultSchema';
 
 // Type Exports
 export type { AlphaOptions } from './schemas/AlphaOptionsSchema';

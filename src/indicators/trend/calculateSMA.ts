@@ -1,6 +1,6 @@
-import { SMAOptions, SMAOptionsSchema } from '../../schemas/indicators/SMAOptionsSchema';
+import { SMAOptions, SMAOptionsSchema } from '../../schemas/SMAOptionsSchema';
 
-import { SMAResult } from '../../schemas/indicators/SMAResultSchema';
+import { SMAResult } from '../../schemas/SMAResultSchema';
 
 /**
  * Calculate Simple Moving Average (SMA)

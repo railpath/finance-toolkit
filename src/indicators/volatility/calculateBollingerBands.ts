@@ -1,6 +1,6 @@
-import { BollingerBandsOptions, BollingerBandsOptionsSchema } from '../../schemas/indicators/BollingerBandsOptionsSchema';
+import { BollingerBandsOptions, BollingerBandsOptionsSchema } from '../../schemas/BollingerBandsOptionsSchema';
 
-import { BollingerBandsResult } from '../../schemas/indicators/BollingerBandsResultSchema';
+import { BollingerBandsResult } from '../../schemas/BollingerBandsResultSchema';
 
 /**
  * Calculate Bollinger Bands

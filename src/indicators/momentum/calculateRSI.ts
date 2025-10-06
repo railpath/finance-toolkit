@@ -1,6 +1,6 @@
-import { RSIOptions, RSIOptionsSchema } from '../../schemas/indicators/RSIOptionsSchema';
+import { RSIOptions, RSIOptionsSchema } from '../../schemas/RSIOptionsSchema';
 
-import { RSIResult } from '../../schemas/indicators/RSIResultSchema';
+import { RSIResult } from '../../schemas/RSIResultSchema';
 
 /**
  * Calculate Relative Strength Index (RSI)

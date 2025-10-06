@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { calculateATR } from './calculateATR';
 
 describe('calculateATR', () => {
@@ -73,15 +74,15 @@ describe('calculateATR', () => {
 
   it('should throw error for empty arrays', () => {
     expect(() => {
-      calculateATR({ high: [], low: [10], close: [11] });
+      calculateATR({ high: [], low: [10], close: [11], period: 1 });
     }).toThrow('High prices array must contain at least one value');
 
     expect(() => {
-      calculateATR({ high: [12], low: [], close: [11] });
+      calculateATR({ high: [12], low: [], close: [11], period: 1 });
     }).toThrow('Low prices array must contain at least one value');
 
     expect(() => {
-      calculateATR({ high: [12], low: [10], close: [] });
+      calculateATR({ high: [12], low: [10], close: [], period: 1 });
     }).toThrow('Close prices array must contain at least one value');
   });
 

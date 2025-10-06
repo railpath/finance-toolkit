@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { calculateEMA } from './calculateEMA';
 
 describe('calculateEMA', () => {
@@ -93,13 +94,6 @@ describe('calculateEMA', () => {
     const result3 = calculateEMA({ prices, period: 3 });
     expect(result3.smoothingFactor).toBeCloseTo(0.5, 3); // 2 / (3 + 1)
     
-    // Skip period 5 test as it exceeds array length
-    // const result5 = calculateEMA({ prices, period: 5 });
-    // expect(result5.smoothingFactor).toBeCloseTo(0.333, 3); // 2 / (5 + 1)
-    
-    // Skip period 10 test as it exceeds array length
-    // const result10 = calculateEMA({ prices, period: 10 });
-    // expect(result10.smoothingFactor).toBeCloseTo(0.182, 3); // 2 / (10 + 1)
   });
 
   it('should handle increasing prices correctly', () => {

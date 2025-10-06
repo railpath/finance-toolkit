@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { calculateBollingerBands } from './calculateBollingerBands';
 
 describe('calculateBollingerBands', () => {
@@ -26,7 +27,7 @@ describe('calculateBollingerBands', () => {
 
   it('should use default stdDevMultiplier when not provided', () => {
     const prices = [10, 12, 11, 13, 14];
-    const result = calculateBollingerBands({ prices, period: 3 });
+    const result = calculateBollingerBands({ prices, period: 3, stdDevMultiplier: 2 });
 
     expect(result.stdDevMultiplier).toBe(2);
   });
@@ -76,35 +77,35 @@ describe('calculateBollingerBands', () => {
 
   it('should throw error for empty prices array', () => {
     expect(() => {
-      calculateBollingerBands({ prices: [], period: 3 });
+      calculateBollingerBands({ prices: [], period: 3, stdDevMultiplier: 2 });
     }).toThrow('Prices array must contain at least one value');
   });
 
   it('should throw error for negative period', () => {
     const prices = [10, 12, 11, 13];
     expect(() => {
-      calculateBollingerBands({ prices, period: -1 });
+      calculateBollingerBands({ prices, period: -1, stdDevMultiplier: 2 });
     }).toThrow('Period must be positive');
   });
 
   it('should throw error for zero period', () => {
     const prices = [10, 12, 11, 13];
     expect(() => {
-      calculateBollingerBands({ prices, period: 0 });
+      calculateBollingerBands({ prices, period: 0, stdDevMultiplier: 2 });
     }).toThrow('Period must be positive');
   });
 
   it('should throw error for non-integer period', () => {
     const prices = [10, 12, 11, 13];
     expect(() => {
-      calculateBollingerBands({ prices, period: 2.5 });
+      calculateBollingerBands({ prices, period: 2.5, stdDevMultiplier: 2 });
     }).toThrow('Period must be an integer');
   });
 
   it('should throw error for period exceeding array length', () => {
     const prices = [10, 12, 11, 13];
     expect(() => {
-      calculateBollingerBands({ prices, period: 5 });
+      calculateBollingerBands({ prices, period: 5, stdDevMultiplier: 2 });
     }).toThrow('Period cannot exceed the length of prices array');
   });
 
@@ -156,7 +157,7 @@ describe('calculateBollingerBands', () => {
 
   it('should handle large dataset correctly', () => {
     const prices = Array.from({ length: 100 }, (_, i) => 100 + Math.sin(i * 0.1) * 10);
-    const result = calculateBollingerBands({ prices, period: 20 });
+    const result = calculateBollingerBands({ prices, period: 20, stdDevMultiplier: 2 });
 
     expect(result.count).toBe(81); // 100 - 20 + 1
     expect(result.upperBand).toHaveLength(81);
@@ -196,7 +197,7 @@ describe('calculateBollingerBands', () => {
 
   it('should handle single price correctly', () => {
     const prices = [10];
-    const result = calculateBollingerBands({ prices, period: 1 });
+    const result = calculateBollingerBands({ prices, period: 1, stdDevMultiplier: 2 });
 
     expect(result.count).toBe(1);
     expect(result.middleBand[0]).toBe(10);

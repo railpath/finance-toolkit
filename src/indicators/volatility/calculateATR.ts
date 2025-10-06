@@ -1,6 +1,6 @@
-import { ATROptions, ATROptionsSchema } from '../../schemas/indicators/ATROptionsSchema';
+import { ATROptions, ATROptionsSchema } from '../../schemas/ATROptionsSchema';
 
-import { ATRResult } from '../../schemas/indicators/ATRResultSchema';
+import { ATRResult } from '../../schemas/ATRResultSchema';
 
 /**
  * Calculate Average True Range (ATR)

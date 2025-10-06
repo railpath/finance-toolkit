@@ -1,6 +1,6 @@
-import { EMAOptions, EMAOptionsSchema } from '../../schemas/indicators/EMAOptionsSchema';
+import { EMAOptions, EMAOptionsSchema } from '../../schemas/EMAOptionsSchema';
 
-import { EMAResult } from '../../schemas/indicators/EMAResultSchema';
+import { EMAResult } from '../../schemas/EMAResultSchema';
 
 /**
  * Calculate Exponential Moving Average (EMA)
