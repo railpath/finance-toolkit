@@ -38,6 +38,13 @@ Part of the [RailPath](https://github.com/railpath) open source ecosystem – bu
 - **Skewness & Kurtosis** – Distribution shape analysis
 - **VaR 95% & 99%** – Pre-configured confidence levels
 
+### **Technical Indicators**
+- **SMA (Simple Moving Average)** – Trend-following indicator
+- **EMA (Exponential Moving Average)** – Weighted trend indicator
+- **RSI (Relative Strength Index)** – Momentum oscillator (0-100)
+- **Bollinger Bands** – Volatility-based price channels
+- **ATR (Average True Range)** – Volatility measurement
+
 ### **Volatility Calculations**
 - **Standard Deviation** – Classical volatility
 - **EWMA Volatility** – Exponentially Weighted Moving Average
@@ -139,6 +146,51 @@ const portfolioVol = calculatePortfolioVolatility({
 });
 ```
 
+### Technical Indicators
+
+```typescript
+import { 
+  calculateSMA, 
+  calculateEMA, 
+  calculateRSI, 
+  calculateBollingerBands, 
+  calculateATR 
+} from '@railpath/finance-toolkit';
+
+// Simple Moving Average (SMA)
+const sma = calculateSMA({
+  prices: [100, 102, 101, 103, 105, 104, 106],
+  period: 5
+});
+
+// Exponential Moving Average (EMA)
+const ema = calculateEMA({
+  prices: [100, 102, 101, 103, 105, 104, 106],
+  period: 5
+});
+
+// Relative Strength Index (RSI)
+const rsi = calculateRSI({
+  prices: [100, 102, 101, 103, 105, 104, 106],
+  period: 14
+});
+
+// Bollinger Bands
+const bollinger = calculateBollingerBands({
+  prices: [100, 102, 101, 103, 105, 104, 106],
+  period: 20,
+  stdDevMultiplier: 2
+});
+
+// Average True Range (ATR)
+const atr = calculateATR({
+  high: [101, 103, 102, 104, 106, 105, 107],
+  low: [99, 101, 100, 102, 104, 103, 105],
+  close: [100, 102, 101, 103, 105, 104, 106],
+  period: 14
+});
+```
+
 ---
 
 ## Use Cases
@@ -163,18 +215,25 @@ const portfolioVol = calculatePortfolioVolatility({
 - Risk assessment and reporting
 - Asset allocation optimization
 
+### **Technical Analyst**
+- Trend analysis with moving averages
+- Momentum indicators for market timing
+- Volatility-based trading signals
+
 ---
 
 ## TypeScript Support
 
-All functions are fully typed with Zod validation:
+All functions are fully typed with Zod validation and modular schema architecture:
 
 ```typescript
 import type { 
   TimeWeightedReturnOptions, 
   TimeWeightedReturnResult,
-  MoneyWeightedReturnOptions,
-  MoneyWeightedReturnResult 
+  SMAOptions,
+  SMAResult,
+  RSIOptions,
+  RSIResult
 } from '@railpath/finance-toolkit';
 
 // Type-safe Options
@@ -189,7 +248,38 @@ const result: TimeWeightedReturnResult = calculateTimeWeightedReturn(options);
 console.log(result.twr); // number
 console.log(result.annualizedTWR); // number
 console.log(result.periodReturns); // number[]
+
+// Technical Indicators with separate Options/Result types
+const smaOptions: SMAOptions = {
+  prices: [100, 102, 101, 103, 105],
+  period: 3
+};
+
+const smaResult: SMAResult = calculateSMA(smaOptions);
+console.log(smaResult.sma); // number[]
+console.log(smaResult.count); // number
+console.log(smaResult.indices); // number[]
 ```
+
+### Schema Architecture
+
+The library uses a modular schema architecture with separate files for Options and Results:
+
+```
+src/schemas/
+├── indicators/
+│   ├── SMAOptionsSchema.ts      # Input validation
+│   ├── SMAResultSchema.ts       # Output structure
+│   ├── RSIOptionsSchema.ts      # Input validation
+│   └── RSIResultSchema.ts       # Output structure
+└── ...
+```
+
+This provides:
+- **Granular imports** - Import only what you need
+- **Better tree-shaking** - Smaller bundle sizes
+- **Clear separation** - Input vs. output validation
+- **Easy maintenance** - Modify schemas without touching implementation
 
 ---
 
@@ -253,6 +343,16 @@ console.log(result.periodReturns); // number[]
 | `calculateCovarianceMatrix` | Asset Covariances | Asset Returns Matrix |
 | `calculatePortfolioVolatility` | Portfolio Risk | Weights, Covariance Matrix |
 
+### Technical Indicators
+
+| Function | Description | Input | Output |
+|----------|-------------|-------|--------|
+| `calculateSMA` | Simple Moving Average | Prices Array, Period | SMA Values, Indices |
+| `calculateEMA` | Exponential Moving Average | Prices Array, Period | EMA Values, Smoothing Factor |
+| `calculateRSI` | Relative Strength Index | Prices Array, Period | RSI Values (0-100), Gains/Losses |
+| `calculateBollingerBands` | Bollinger Bands | Prices Array, Period, StdDev Multiplier | Upper/Middle/Lower Bands, %B |
+| `calculateATR` | Average True Range | High/Low/Close Arrays, Period | ATR Values, True Range |
+
 ---
 
 ## Testing
@@ -266,9 +366,15 @@ npm run test:watch
 
 # Run tests with coverage
 npm run test:coverage
+
+# Run integration tests
+npm run test:integration
+
+# Run integration tests in watch mode
+npm run test:integration:watch
 ```
 
-**Test Coverage**: 1016 Tests across 42 test files
+**Test Coverage**: 1124 Tests across 50 test files
 
 ### Battle Testing
 

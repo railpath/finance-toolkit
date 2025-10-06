@@ -1,3 +1,14 @@
+// Technical Indicators - Trend
+export { calculateSMA } from './indicators/trend/calculateSMA';
+export { calculateEMA } from './indicators/trend/calculateEMA';
+
+// Technical Indicators - Momentum
+export { calculateRSI } from './indicators/momentum/calculateRSI';
+
+// Technical Indicators - Volatility
+export { calculateBollingerBands } from './indicators/volatility/calculateBollingerBands';
+export { calculateATR } from './indicators/volatility/calculateATR';
+
 // Risk Metrics
 export { calculateAlpha } from './risk/calculateAlpha';
 export { calculateBeta } from './risk/calculateBeta';
@@ -94,6 +105,18 @@ export {
   calculateInequalityConstraintViolation,
   isSolutionFeasible
 } from './utils/constraintProjection';
+
+// Technical Indicator Type Exports
+export type { SMAOptions } from './schemas/indicators/SMAOptionsSchema';
+export type { SMAResult } from './schemas/indicators/SMAResultSchema';
+export type { EMAOptions } from './schemas/indicators/EMAOptionsSchema';
+export type { EMAResult } from './schemas/indicators/EMAResultSchema';
+export type { RSIOptions } from './schemas/indicators/RSIOptionsSchema';
+export type { RSIResult } from './schemas/indicators/RSIResultSchema';
+export type { BollingerBandsOptions } from './schemas/indicators/BollingerBandsOptionsSchema';
+export type { BollingerBandsResult } from './schemas/indicators/BollingerBandsResultSchema';
+export type { ATROptions } from './schemas/indicators/ATROptionsSchema';
+export type { ATRResult } from './schemas/indicators/ATRResultSchema';
 
 // Type Exports
 export type { AlphaOptions } from './schemas/AlphaOptionsSchema';
