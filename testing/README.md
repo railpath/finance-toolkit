@@ -1,150 +1,54 @@
-# Finance Toolkit Battle Testing
+# Testing Framework
 
-Comprehensive battle testing framework to validate TypeScript finance functions against Python equivalents using established battle-tested libraries (numpy, pandas, scipy).
+This directory contains comprehensive testing tools for the @railpath/finance-toolkit.
 
-## Purpose
+## Directory Structure
 
-This battle testing framework ensures that our TypeScript finance toolkit produces accurate results by comparing them against Python implementations that leverage battle-tested libraries. The Python implementations serve as the "ground truth" since they use established, mathematically verified libraries.
+### [Integration Tests](integration/)
+- **TypeScript validation** - Tests all functions with comprehensive test data
+- **Ground truth establishment** - Creates reference results for battle testing
+- **Test data foundation** - JSON test cases used by both TypeScript and Python
+
+### [Battle Testing](battle-testing/)
+- **Python vs TypeScript comparison** - Ensures accuracy by comparing implementations
+- **Battle-tested libraries** - Uses numpy, scipy, pandas as ground truth
+- **Comprehensive validation** - Tests all 38+ functions across different scenarios
+
+### [Performance Testing](performance/)
+- **Benchmark Suite** - Performance testing for different dataset sizes
+- **Memory Profiling** - Resource usage analysis
+- **Regression Detection** - Performance monitoring across versions
 
 ## Quick Start
 
+### Integration Tests
 ```bash
-# Install dependencies
+npm run test:integration
+```
+
+### Battle Testing
+```bash
+cd battle-testing
 pip install -r requirements.txt
-
-# Build TypeScript project
-cd .. && npm run build && cd testing
-
-# Run comprehensive battle tests
 python battle_tester.py
 ```
 
-## Project Structure
-
-```
-testing/
-├── finance_toolkit.py      # Python implementations using numpy/scipy
-├── battle_tester.py        # Test runner and comparison engine
-├── requirements.txt        # Python dependencies
-├── .gitignore             # Git ignore rules
-└── README.md              # This documentation
+### Performance Testing
+```bash
+npm run test:performance
 ```
 
-## Test Data
+## Test Coverage
 
-Uses structured test data from `../src/integration/test-data.json`:
-- **Input parameters** for each function
-- **Expected results** (Python as ground truth)
-- **Multiple test cases** per function
-- **Comprehensive coverage** of edge cases
-
-## Functions Tested (38 Total)
-
-### Risk Metrics
-- `calculateAlpha` - Jensen's Alpha (CAPM)
-- `calculateBeta` - Systematic risk measure
-- `calculateSharpeRatio` - Risk-adjusted returns
-- `calculateSortinoRatio` - Downside risk-adjusted returns
-- `calculateInformationRatio` - Active return vs tracking error
-
-### VaR & Risk Measures
-- `calculateVaR` - Value at Risk (historical & parametric)
-- `calculateVaR95` / `calculateVaR99` - Specific confidence levels
-- `calculateHistoricalExpectedShortfall` - Historical CVaR
-- `calculateParametricExpectedShortfall` - Parametric CVaR
-- `calculateMonteCarloVaR` - Monte Carlo VaR simulation
-
-### Statistical Functions
-- `calculateKurtosis` - Fourth moment (tail risk)
-- `calculateSkewness` - Third moment (asymmetry)
-- `calculateStandardDeviation` - Volatility measure
-- `calculateSemideviation` - Downside volatility
-
-### Volatility Models
-- `calculateVolatility` - Standard volatility
-- `calculateEWMAVolatility` - Exponentially Weighted Moving Average
-- `calculateGarmanKlassVolatility` - OHLC-based volatility
-- `calculateParkinsonVolatility` - High-Low volatility
-
-### Portfolio Management
-- `calculateReturns` - Simple and logarithmic returns
-- `calculateMaxDrawdown` - Maximum peak-to-trough decline
-- `calculatePortfolioMetrics` - Comprehensive portfolio analysis
-- `calculatePortfolioOptimization` - Markowitz optimization
-- `calculatePortfolioRebalancing` - Rebalancing analysis
-- `calculateEqualWeightPortfolio` - Equal weight allocation
-
-### Advanced Analytics
-- `calculateCorrelationMatrix` - Asset correlations
-- `calculateCovarianceMatrix` - Asset covariances
-- `calculatePortfolioVolatility` - Portfolio risk
-- `calculateTrackingError` - Benchmark tracking
-- `calculatePerformanceAttribution` - Return attribution
-- `calculateRiskMetrics` - Comprehensive risk analysis
-
-### Return Calculations
-- `calculateMoneyWeightedReturn` - IRR-based returns
-- `calculateTimeWeightedReturn` - Geometric mean returns
-- `calculateCalmarRatio` - Return vs max drawdown
-
-## Design Principles
-
-### Battle-Tested Libraries
-- **scipy.stats** for statistical functions (norm.ppf, kurtosis, skew)
-- **numpy** for array operations and mathematical functions
-- **scipy.optimize** for portfolio optimization
-- **pandas** for data manipulation (where applicable)
-
-### TypeScript Compatibility
-- Maintain exact compatibility with TypeScript implementations
-- Use population statistics (ddof=0) where TypeScript does
-- Preserve exact mathematical formulas and conventions
-- Handle edge cases identically
-
-### Error Handling
-- Comprehensive input validation
-- Graceful handling of edge cases (empty arrays, zero volatility)
-- Detailed error reporting and analysis
-
-## Test Results
-
-Current Status: **30 of 38 tests passing (78.9%)**
-
-### Passing Tests (30)
-All core functions working correctly with battle-tested libraries.
-
-### Minor Differences (8)
-Small numerical precision differences in:
-- Money Weighted Return (IRR convergence)
-- Parametric VaR (Z-score precision)
-- Portfolio Optimization (optimization tolerance)
-- Tracking Error (calculation method)
+- **Unit Tests**: 1160 tests across 53 test files (in `src/`)
+- **Integration Tests**: Comprehensive function validation
+- **Battle Tests**: Python vs TypeScript accuracy verification
+- **Performance Tests**: Speed and memory benchmarks
 
 ## Configuration
 
-### Tolerance Levels
-- **Absolute tolerance**: 1e-10
-- **Relative tolerance**: 1e-6
-- **Special handling** for zero values and edge cases
+Each testing framework has its own configuration and documentation in its respective directory.
 
-### Error Analysis
-- Detailed field-by-field comparison
-- Relative error calculations
-- Maximum error reporting
-- Specific failure details
+## Results
 
-## Success Metrics
-
-- **78.9% test pass rate** with battle-tested libraries
-- **All core financial functions** validated
-- **Comprehensive edge case coverage**
-- **Professional-grade error reporting**
-- **Maintainable and extensible framework**
-
-## Future Enhancements
-
-- Additional statistical functions
-- More sophisticated optimization algorithms
-- Enhanced error reporting with visualizations
-- Performance benchmarking
-- Integration with CI/CD pipelines
+Test results are automatically generated and stored in respective `results/` directories for analysis and tracking over time.

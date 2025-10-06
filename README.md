@@ -424,13 +424,23 @@ npm run test:integration
 
 # Run integration tests in watch mode
 npm run test:integration:watch
+
+# Run performance benchmarks
+npm run test:performance
+
+# Run performance benchmarks in watch mode
+npm run test:performance:watch
 ```
 
 **Test Coverage**: 1160 Tests across 53 test files
 
 ### Battle Testing
 
-This library uses a comprehensive battle testing approach to ensure accuracy by comparing TypeScript implementations against Python equivalents using battle-tested libraries (numpy, scipy, pandas). See [testing/README.md](testing/README.md) for details on the battle testing framework.
+This library uses a comprehensive battle testing approach to ensure accuracy by comparing TypeScript implementations against Python equivalents using battle-tested libraries (numpy, scipy, pandas).
+
+### Performance Testing
+
+Comprehensive performance benchmarks test functions across different dataset sizes to ensure optimal performance and detect regressions. Performance tests measure execution time, memory usage, and throughput for various dataset sizes to identify bottlenecks and ensure scalability. See [testing/README.md](testing/README.md) for details on the performance testing framework.
 
 ---
 

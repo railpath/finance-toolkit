@@ -2,17 +2,17 @@
 import { describe, expect, it } from 'vitest';
 
 // Import all the functions we want to test
-import { calculateAlpha } from '../risk/calculateAlpha';
-import { calculateBeta } from '../risk/calculateBeta';
-import { calculateInformationRatio } from '../portfolio/calculateInformationRatio';
-import { calculateMaxDrawdown } from '../risk/calculateMaxDrawdown';
-import { calculateMoneyWeightedReturn } from '../portfolio/calculateMoneyWeightedReturn';
-import { calculateReturns } from '../portfolio/calculateReturns';
-import { calculateSharpeRatio } from '../risk/calculateSharpeRatio';
-import { calculateSortinoRatio } from '../risk/calculateSortinoRatio';
-import { calculateTimeWeightedReturn } from '../portfolio/calculateTimeWeightedReturn';
-import { calculateVaR } from '../risk/calculateVaR';
-import { calculateVolatility } from '../risk/calculateVolatility';
+import { calculateAlpha } from '../../src/risk/calculateAlpha';
+import { calculateBeta } from '../../src/risk/calculateBeta';
+import { calculateInformationRatio } from '../../src/portfolio/calculateInformationRatio';
+import { calculateMaxDrawdown } from '../../src/risk/calculateMaxDrawdown';
+import { calculateMoneyWeightedReturn } from '../../src/portfolio/calculateMoneyWeightedReturn';
+import { calculateReturns } from '../../src/portfolio/calculateReturns';
+import { calculateSharpeRatio } from '../../src/risk/calculateSharpeRatio';
+import { calculateSortinoRatio } from '../../src/risk/calculateSortinoRatio';
+import { calculateTimeWeightedReturn } from '../../src/portfolio/calculateTimeWeightedReturn';
+import { calculateVaR } from '../../src/risk/calculateVaR';
+import { calculateVolatility } from '../../src/risk/calculateVolatility';
 import testData from './test-data.json';
 
 describe('Working Integration Tests - All Functions', () => {
