@@ -316,9 +316,9 @@ console.log(macdResult.histogram); // number[]
 
 For detailed implementation specifications, see:
 
-- 📚 **[Portfolio Optimization](docs/PORTFOLIO_OPTIMIZATION.md)** - Constraints, solver details, mathematical formulation
-- 📊 **[VaR Methods](docs/VAR_METHODS.md)** - Distribution assumptions, time horizons, simulation parameters
-- 📈 **[Technical Indicators](docs/TECHNICAL_INDICATORS.md)** - Calculation methods, smoothing techniques, standards
+- **[Portfolio Optimization](docs/PORTFOLIO_OPTIMIZATION.md)** - Constraints, solver details, mathematical formulation
+- **[VaR Methods](docs/VAR_METHODS.md)** - Distribution assumptions, time horizons, simulation parameters
+- **[Technical Indicators](docs/TECHNICAL_INDICATORS.md)** - Calculation methods, smoothing techniques, standards
 
 ---
 
