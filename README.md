@@ -328,72 +328,71 @@ For detailed implementation specifications, see:
 
 | Function | Description | Input | Output |
 |----------|-------------|-------|--------|
-| `calculateTimeWeightedReturn` | TWR Performance | Portfolio Values, Cash Flows | TWR, Annualized TWR, Period Returns |
-| `calculateMoneyWeightedReturn` | MWR Performance (IRR) | Cash Flows, Dates, Final Value | MWR, Annualized MWR, NPV, Iterations |
-| `calculatePortfolioMetrics` | Comprehensive Analysis | Portfolio Values, Risk-Free Rate | CAGR, Sharpe, Sortino, VaR, ES, Volatility |
-| `calculatePerformanceAttribution` | Factor Analysis | Returns, Factor Returns | Factor Contributions, Active Return |
-| `calculatePortfolioOptimization` | Mean-Variance Optimization | Expected Returns, Covariance Matrix | Optimal Weights, Risk-Return |
-| `calculatePortfolioRebalancing` | Rebalancing Strategies | Current Weights, Target Weights | New Weights, Trade Amounts |
-| `calculateEqualWeightPortfolio` | Equal Weight Allocation | Asset Count | Equal Weights, Portfolio Metrics |
-| `calculateReturns` | Return Calculations | Prices, Dates | Various Return Types |
-| `calculateRiskMetrics` | Portfolio Risk Analysis | Returns, Risk-Free Rate | Risk Metrics, VaR, ES |
-| `calculateInformationRatio` | Active Return Analysis | Portfolio Returns, Benchmark Returns | Information Ratio, Active Return |
-| `calculateTrackingError` | Benchmark Deviation | Portfolio Returns, Benchmark Returns | Tracking Error, Active Risk |
+| [`calculateTimeWeightedReturn`](src/portfolio/calculateTimeWeightedReturn.ts) | TWR Performance | Portfolio Values, Cash Flows | TWR, Annualized TWR, Period Returns |
+| [`calculateMoneyWeightedReturn`](src/portfolio/calculateMoneyWeightedReturn.ts) | MWR Performance (IRR) | Cash Flows, Dates, Final Value | MWR, Annualized MWR, NPV, Iterations |
+| [`calculatePortfolioMetrics`](src/portfolio/calculatePortfolioMetrics.ts) | Comprehensive Analysis | Portfolio Values, Risk-Free Rate | CAGR, Sharpe, Sortino, VaR, ES, Volatility |
+| [`calculatePerformanceAttribution`](src/portfolio/calculatePerformanceAttribution.ts) | Factor Analysis | Returns, Factor Returns | Factor Contributions, Active Return |
+| [`calculatePortfolioOptimization`](src/portfolio/calculatePortfolioOptimization.ts) | Mean-Variance Optimization | Expected Returns, Covariance Matrix | Optimal Weights, Risk-Return |
+| [`calculatePortfolioRebalancing`](src/portfolio/calculatePortfolioRebalancing.ts) | Rebalancing Strategies | Current Weights, Target Weights | New Weights, Trade Amounts |
+| [`calculateEqualWeightPortfolio`](src/portfolio/calculateEqualWeightPortfolio.ts) | Equal Weight Allocation | Asset Count | Equal Weights, Portfolio Metrics |
+| [`calculateReturns`](src/portfolio/calculateReturns.ts) | Return Calculations | Prices, Dates | Various Return Types |
+| [`calculateRiskMetrics`](src/portfolio/calculateRiskMetrics.ts) | Portfolio Risk Analysis | Returns, Risk-Free Rate | Risk Metrics, VaR, ES |
+| [`calculateInformationRatio`](src/portfolio/calculateInformationRatio.ts) | Active Return Analysis | Portfolio Returns, Benchmark Returns | Information Ratio, Active Return |
+| [`calculateTrackingError`](src/portfolio/calculateTrackingError.ts) | Benchmark Deviation | Portfolio Returns, Benchmark Returns | Tracking Error, Active Risk |
 
 ### Risk Metrics
 
 | Function | Description | Methods |
 |----------|-------------|---------|
-| `calculateVaR` | Value at Risk | Historical, Parametric, Monte Carlo |
-| `calculateVaR95` | VaR 95% Confidence | Historical, Parametric, Monte Carlo |
-| `calculateVaR99` | VaR 99% Confidence | Historical, Parametric, Monte Carlo |
-| `calculateExpectedShortfall` | Conditional VaR | Historical, Parametric |
-| `calculateHistoricalVaR` | Historical VaR | Historical Method |
-| `calculateParametricVaR` | Parametric VaR | Normal Distribution |
-| `calculateMonteCarloVaR` | Monte Carlo VaR | Simulation Method |
-| `calculateHistoricalExpectedShortfall` | Historical ES | Historical Method |
-| `calculateParametricExpectedShortfall` | Parametric ES | Normal Distribution |
-| `calculateSharpeRatio` | Risk-Adjusted Returns | Standard, Annualized |
-| `calculateSortinoRatio` | Downside Risk-Adjusted | Standard, Annualized |
-| `calculateSemideviation` | Downside Volatility | Zero/Mean Threshold |
-| `calculateCalmarRatio` | Return vs. Drawdown | Calmar Ratio |
-| `calculateSkewness` | Distribution Asymmetry | Third Moment |
-| `calculateKurtosis` | Distribution Tailedness | Fourth Moment (Excess) |
-| `calculateAlpha` | CAPM Alpha | Asset vs. Benchmark |
-| `calculateBeta` | CAPM Beta | Asset vs. Benchmark |
-| `calculateMaxDrawdown` | Maximum Loss | Peak-to-Trough Analysis |
-| `calculateStandardDeviation` | Standard Deviation | Classical Measure |
+| [`calculateVaR`](src/risk/calculateVaR.ts) | Value at Risk | Historical, Parametric, Monte Carlo |
+| [`calculateVaR95`](src/risk/calculateVaR95.ts) | VaR 95% Confidence | Historical, Parametric, Monte Carlo |
+| [`calculateVaR99`](src/risk/calculateVaR99.ts) | VaR 99% Confidence | Historical, Parametric, Monte Carlo |
+| [`calculateHistoricalVaR`](src/risk/calculateHistoricalVaR.ts) | Historical VaR | Historical Method |
+| [`calculateParametricVaR`](src/risk/calculateParametricVaR.ts) | Parametric VaR | Normal Distribution |
+| [`calculateMonteCarloVaR`](src/risk/calculateMonteCarloVaR.ts) | Monte Carlo VaR | Simulation Method |
+| [`calculateHistoricalExpectedShortfall`](src/risk/calculateHistoricalExpectedShortfall.ts) | Historical ES | Historical Method |
+| [`calculateParametricExpectedShortfall`](src/risk/calculateParametricExpectedShortfall.ts) | Parametric ES | Normal Distribution |
+| [`calculateSharpeRatio`](src/risk/calculateSharpeRatio.ts) | Risk-Adjusted Returns | Standard, Annualized |
+| [`calculateSortinoRatio`](src/risk/calculateSortinoRatio.ts) | Downside Risk-Adjusted | Standard, Annualized |
+| [`calculateSemideviation`](src/risk/calculateSemideviation.ts) | Downside Volatility | Zero/Mean Threshold |
+| [`calculateCalmarRatio`](src/risk/calculateCalmarRatio.ts) | Return vs. Drawdown | Calmar Ratio |
+| [`calculateSkewness`](src/risk/calculateSkewness.ts) | Distribution Asymmetry | Third Moment |
+| [`calculateKurtosis`](src/risk/calculateKurtosis.ts) | Distribution Tailedness | Fourth Moment (Excess) |
+| [`calculateAlpha`](src/risk/calculateAlpha.ts) | CAPM Alpha | Asset vs. Benchmark |
+| [`calculateBeta`](src/risk/calculateBeta.ts) | CAPM Beta | Asset vs. Benchmark |
+| [`calculateMaxDrawdown`](src/risk/calculateMaxDrawdown.ts) | Maximum Loss | Peak-to-Trough Analysis |
+| [`calculateStandardDeviation`](src/risk/calculateStandardDeviation.ts) | Standard Deviation | Classical Measure |
 
 ### Volatility
 
 | Function | Description | Input |
 |----------|-------------|-------|
-| `calculateVolatility` | Standard Deviation | Returns Array |
-| `calculateEWMAVolatility` | Exponentially Weighted | Returns, Lambda |
-| `calculateParkinsonVolatility` | High-Low Range | High, Low Prices |
-| `calculateGarmanKlassVolatility` | OHLC-based | Open, High, Low, Close |
-| `calculateStandardDeviation` | Classical Measure | Returns Array |
+| [`calculateVolatility`](src/risk/calculateVolatility.ts) | Standard Deviation | Returns Array |
+| [`calculateEWMAVolatility`](src/risk/calculateEWMAVolatility.ts) | Exponentially Weighted | Returns, Lambda |
+| [`calculateParkinsonVolatility`](src/risk/calculateParkinsonVolatility.ts) | High-Low Range | High, Low Prices |
+| [`calculateGarmanKlassVolatility`](src/risk/calculateGarmanKlassVolatility.ts) | OHLC-based | Open, High, Low, Close |
+| [`calculateStandardDeviation`](src/risk/calculateStandardDeviation.ts) | Classical Measure | Returns Array |
 
 ### Portfolio Analysis
 
 | Function | Description | Input |
 |----------|-------------|-------|
-| `calculateCorrelationMatrix` | Asset Correlations | Asset Returns Matrix |
-| `calculateCovarianceMatrix` | Asset Covariances | Asset Returns Matrix |
-| `calculatePortfolioVolatility` | Portfolio Risk | Weights, Covariance Matrix |
+| [`calculateCorrelationMatrix`](src/risk/calculateCorrelationMatrix.ts) | Asset Correlations | Asset Returns Matrix |
+| [`calculateCovarianceMatrix`](src/risk/calculateCovarianceMatrix.ts) | Asset Covariances | Asset Returns Matrix |
+| [`calculatePortfolioVolatility`](src/risk/calculatePortfolioVolatility.ts) | Portfolio Risk | Weights, Covariance Matrix |
 
 ### Technical Indicators
 
 | Function | Description | Input | Output |
 |----------|-------------|-------|--------|
-| `calculateSMA` | Simple Moving Average | Prices Array, Period | SMA Values, Indices |
-| `calculateEMA` | Exponential Moving Average | Prices Array, Period | EMA Values, Smoothing Factor |
-| `calculateMACD` | Moving Average Convergence Divergence | Prices Array, Fast/Slow/Signal Periods | MACD Line, Signal Line, Histogram |
-| `calculateRSI` | Relative Strength Index | Prices Array, Period | RSI Values (0-100), Gains/Losses |
-| `calculateStochastic` | Stochastic Oscillator | High/Low/Close Arrays, K/D Periods | %K, %D, Highest High, Lowest Low |
-| `calculateWilliamsR` | Williams %R | High/Low/Close Arrays, Period | Williams %R Values (-100 to 0) |
-| `calculateBollingerBands` | Bollinger Bands | Prices Array, Period, StdDev Multiplier | Upper/Middle/Lower Bands, %B |
-| `calculateATR` | Average True Range | High/Low/Close Arrays, Period | ATR Values, True Range |
+| [`calculateSMA`](src/indicators/trend/calculateSMA.ts) | Simple Moving Average | Prices Array, Period | SMA Values, Indices |
+| [`calculateEMA`](src/indicators/trend/calculateEMA.ts) | Exponential Moving Average | Prices Array, Period | EMA Values, Smoothing Factor |
+| [`calculateMACD`](src/indicators/trend/calculateMACD.ts) | Moving Average Convergence Divergence | Prices Array, Fast/Slow/Signal Periods | MACD Line, Signal Line, Histogram |
+| [`calculateRSI`](src/indicators/momentum/calculateRSI.ts) | Relative Strength Index | Prices Array, Period | RSI Values (0-100), Gains/Losses |
+| [`calculateStochastic`](src/indicators/momentum/calculateStochastic.ts) | Stochastic Oscillator | High/Low/Close Arrays, K/D Periods | %K, %D, Highest High, Lowest Low |
+| [`calculateWilliamsR`](src/indicators/momentum/calculateWilliamsR.ts) | Williams %R | High/Low/Close Arrays, Period | Williams %R Values (-100 to 0) |
+| [`calculateBollingerBands`](src/indicators/volatility/calculateBollingerBands.ts) | Bollinger Bands | Prices Array, Period, StdDev Multiplier | Upper/Middle/Lower Bands, %B |
+| [`calculateATR`](src/indicators/volatility/calculateATR.ts) | Average True Range | High/Low/Close Arrays, Period | ATR Values, True Range |
 
 ---
 
