@@ -310,25 +310,15 @@ console.log(macdResult.signalLine); // number[]
 console.log(macdResult.histogram); // number[]
 ```
 
-### Schema Architecture
+---
 
-The library uses a modular schema architecture with separate files for Options and Results:
+## Documentation
 
-```
-src/schemas/
-├── indicators/
-│   ├── SMAOptionsSchema.ts      # Input validation
-│   ├── SMAResultSchema.ts       # Output structure
-│   ├── RSIOptionsSchema.ts      # Input validation
-│   └── RSIResultSchema.ts       # Output structure
-└── ...
-```
+For detailed implementation specifications, see:
 
-This provides:
-- **Granular imports** - Import only what you need
-- **Better tree-shaking** - Smaller bundle sizes
-- **Clear separation** - Input vs. output validation
-- **Easy maintenance** - Modify schemas without touching implementation
+- 📚 **[Portfolio Optimization](docs/PORTFOLIO_OPTIMIZATION.md)** - Constraints, solver details, mathematical formulation
+- 📊 **[VaR Methods](docs/VAR_METHODS.md)** - Distribution assumptions, time horizons, simulation parameters
+- 📈 **[Technical Indicators](docs/TECHNICAL_INDICATORS.md)** - Calculation methods, smoothing techniques, standards
 
 ---
 
