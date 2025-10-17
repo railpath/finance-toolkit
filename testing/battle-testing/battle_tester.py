@@ -76,11 +76,13 @@ console.log(JSON.stringify(result));
         f.write(test_content)
     
     try:
+        # Run from project root (dynamically determined)
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
         result = subprocess.run(
             ['node', '/tmp/ts_test.js'],
             capture_output=True,
             text=True,
-            cwd='/Users/kcnpxcp/Dev/railpath/finance-toolkit'
+            cwd=project_root
         )
         
         if result.returncode != 0:

@@ -40,15 +40,8 @@ export function calculateAlpha(options: AlphaOptions): AlphaResult {
   const assetReturn = assetMeanReturn * annualizationFactor;
   const benchmarkReturn = benchmarkMeanReturn * annualizationFactor;
 
-  // Period risk-free rate
-  const periodRiskFreeRate = riskFreeRate / annualizationFactor;
-
   // CAPM expected return (annualized)
   const expectedReturn = riskFreeRate + beta * (benchmarkReturn - riskFreeRate);
-
-  // Period expected return
-  const periodExpectedReturn =
-    periodRiskFreeRate + beta * (benchmarkMeanReturn - periodRiskFreeRate);
 
   // Alpha
   const annualizedAlpha = assetReturn - expectedReturn;

@@ -63,6 +63,14 @@ Part of the [RailPath](https://github.com/railpath) open source ecosystem – bu
 - **Equal Weight Allocation** – Equal weight strategies
 - **Performance Attribution** – Factor-based analysis
 
+### **Machine Learning - Regime Detection**
+- **Hidden Markov Model (HMM)** – Market regime identification (bullish/bearish/neutral)
+- **Feature Extraction** – Automatic feature engineering from price data
+- **Flexible Configuration** – 2-5+ states with custom labels
+- **Advanced Features** – Returns, Volatility, RSI, MACD, EMA support
+- **Production-Ready** – Numerically stable algorithms, zero runtime dependencies
+- **Low-Level API** – Forward, Backward, Viterbi, Baum-Welch algorithms for advanced users
+
 ---
 
 ## Language Support
@@ -217,7 +225,32 @@ const bollinger = calculateBollingerBands({
   period: 20,
   stdDevMultiplier: 2
 });
+```
 
+### Machine Learning - Regime Detection
+
+```typescript
+import { detectRegime } from '@railpath/finance-toolkit';
+
+// Simple regime detection (3 states: bearish, neutral, bullish)
+const result = detectRegime(prices);
+
+console.log(result.currentRegime); // 'bullish'
+console.log(result.confidence); // 0.85
+console.log(result.regimes); // ['neutral', 'neutral', 'bullish', ...]
+
+// Advanced with custom features
+const advancedResult = detectRegime(prices, {
+  numStates: 4,
+  features: ['returns', 'volatility', 'rsi'],
+  featureWindow: 20,
+  stateLabels: ['strong_bearish', 'weak_bearish', 'weak_bullish', 'strong_bullish']
+});
+```
+
+### More Examples
+
+```typescript
 // Average True Range (ATR)
 const atr = calculateATR({
   high: [101, 103, 102, 104, 106, 105, 107],
@@ -394,6 +427,18 @@ For detailed implementation specifications, see:
 | [`calculateBollingerBands`](src/indicators/volatility/calculateBollingerBands.ts) | Bollinger Bands | Prices Array, Period, StdDev Multiplier | Upper/Middle/Lower Bands, %B |
 | [`calculateATR`](src/indicators/volatility/calculateATR.ts) | Average True Range | High/Low/Close Arrays, Period | ATR Values, True Range |
 
+### Machine Learning - Regime Detection
+
+| Function | Description | Input | Output |
+|----------|-------------|-------|--------|
+| [`detectRegime`](src/ml/hmm/detectRegime.ts) | HMM-based Market Regime Detection | Prices Array, Options | Current Regime, Regime Sequence, Probabilities, Model |
+| [`trainHMM`](src/ml/hmm/core/trainHMM.ts) | Train Hidden Markov Model | Feature Matrix, Options | Trained HMM Model |
+| [`extractFeatures`](src/ml/hmm/core/extractFeatures.ts) | Extract Features from Prices | Prices Array, Feature Config | Standardized Feature Matrix |
+
+**Advanced HMM Algorithms**: [`forward`](src/ml/hmm/algorithms/forward.ts), [`backward`](src/ml/hmm/algorithms/backward.ts), [`viterbi`](src/ml/hmm/algorithms/viterbi.ts), [`baumWelch`](src/ml/hmm/algorithms/baumWelch.ts)
+
+📖 **[Full Regime Detection Documentation](docs/REGIME_DETECTION.md)**
+
 ---
 
 ## Testing
@@ -421,7 +466,7 @@ npm run test:performance
 npm run test:performance:watch
 ```
 
-**Test Coverage**: 1160 Tests across 53 test files
+**Test Coverage**: 1200+ Tests across 59 test files
 
 ### Battle Testing
 

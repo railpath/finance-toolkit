@@ -1,7 +1,7 @@
 {
   "name": "@railpath/finance-toolkit",
   "version": "0.4.1",
-  "description": "Production-ready finance library for portfolio construction, risk analytics, and quantitative metrics",
+  "description": "Production-ready finance library for portfolio construction, risk analytics, quantitative metrics, and ML-based regime detection",
   "author": "Benjamin Damm <kontakt@benjamin-damm.ch>",
   "license": "MIT",
   "repository": {
@@ -25,7 +25,13 @@
     "technical-analysis",
     "statistical-moments",
     "var",
-    "expected-shortfall"
+    "expected-shortfall",
+    "machine-learning",
+    "hidden-markov-model",
+    "hmm",
+    "regime-detection",
+    "market-regimes",
+    "time-series-analysis"
   ],
   "type": "module",
   "main": "./dist/index.js",

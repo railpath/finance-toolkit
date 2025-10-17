@@ -184,3 +184,46 @@ export type { SemideviationResult } from './schemas/SemideviationResultSchema';
 // Utility Type Exports
 export type { QuadraticProgramOptions } from './schemas/QuadraticProgramOptionsSchema';
 export type { QuadraticProgramResult } from './schemas/QuadraticProgramResultSchema';
+
+// Machine Learning - Regime Detection
+export { detectRegime } from './ml/hmm/detectRegime';
+export { 
+  trainHMM, 
+  extractFeatures, 
+  initializeHMM,
+  forward, 
+  backward, 
+  viterbi, 
+  baumWelch 
+} from './ml/hmm';
+
+// Machine Learning - Utils (for Power Users)
+export { 
+  logSumExp, 
+  normalizeRows, 
+  normalizeArray, 
+  addNoise,
+  gaussianPDF, 
+  logGaussianPDF,
+  calculateMean, 
+  calculateVariance, 
+  standardize,
+  multivariateGaussianPDF,
+  logMultivariateGaussianPDF,
+  validatePriceArray,
+  validateFeatureMatrix,
+  validateHMMParameters,
+  validateNumStates
+} from './ml/utils';
+
+// ML Type Exports
+export type { RegimeDetectionOptions } from './ml/schemas/RegimeDetectionOptionsSchema';
+export type { RegimeDetectionResult } from './ml/schemas/RegimeDetectionResultSchema';
+export type { HMMModel } from './ml/schemas/HMMModelSchema';
+export type { EmissionParams } from './ml/schemas/EmissionParamsSchema';
+export type { FeatureOptions } from './ml/schemas/FeatureOptionsSchema';
+export type { BaumWelchOptions } from './ml/schemas/BaumWelchOptionsSchema';
+export type { ForwardResult } from './ml/schemas/ForwardResultSchema';
+export type { BackwardResult } from './ml/schemas/BackwardResultSchema';
+export type { ViterbiResult } from './ml/schemas/ViterbiResultSchema';
+export type { TrainHMMOptions } from './ml/schemas/TrainHMMOptionsSchema';
