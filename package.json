@@ -1,6 +1,6 @@
 {
   "name": "@railpath/finance-toolkit",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Production-ready finance library for portfolio construction, risk analytics, quantitative metrics, and ML-based regime detection",
   "author": "Benjamin Damm <kontakt@benjamin-damm.ch>",
   "license": "MIT",
